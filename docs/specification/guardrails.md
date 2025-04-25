@@ -30,7 +30,8 @@ This validation system ensures that medical information provided by the LLM is b
 ```mermaid
 sequenceDiagram
     actor User
-    participant LLM as LLM
+    participant LLM as AI Agent
+    participant GATE as HMCP Gateway
     participant GF as Guardrails Framework
     participant Actions as NeMo Guardrails Actions
     participant Validator as MedicalJournalValidator
@@ -41,6 +42,14 @@ sequenceDiagram
         Note over Validator, VectorDB: Initialization
         Validator->>Validator: _initialize_vector_db()
         Validator->>VectorDB: Load or create vector database with medical journal data
+    end
+
+    %% Agent Registration
+    rect rgb(240, 240, 240)
+        Note over LLM, GATE: Agent Registration
+        LLM->>GATE: Register Agent and <br>configure guardrails
+        Note right of GATE: Extract statements using regex patterns and medical keywords  
+        LLM->>LLM: Generate initial response
     end
 
     %% User Interaction

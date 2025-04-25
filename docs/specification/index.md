@@ -1,7 +1,7 @@
 # HMCP Specification
 
 Healthcare Model Context Protocol (HMCP) expands on base [MCP](https://modelcontextprotocol.io/specification/2025-03-26) by adding the below enhancements:
-- [Mandatory Authentication, Authorization & Scopes](#authentication--scopes)
+- [Authentication, Authorization & Scopes](#authentication--scopes)
     - Auth can be OAuth 2.0 or mTLS
 - [Patient Context](#patient-context)
 - [Guardrails](#guardrails)
@@ -42,50 +42,6 @@ graph LR
     end
 ```
 
-### Agent Card
-- Each server side agent can define the agent card for clients to discover their configurations: (confirm this with MCP and A2A protocols)
-    ```
-    {
-        name: Agent_Name,
-        id: Unique Id for this deployment,
-        Auth_Method : OAuth 2.0 or mTLS,
-        Auth_Endpoint: Auth server URL,
-        Capabilities: {
-            Tools,
-            List,
-            Sampling,
-            ...
-        },
-        Guardrails: {
-            PHI_Redact,
-            ...
-        }
-        Audit : Yes,
-
-    }
-    ```
-
-### Other Features
-- Allow to register agents and define capabilities
-- Allow to define new guardrails
-- Server will provide some default guardrails
-- Server will provide access to Foundational/Custom LLM's & SLM's
-- Allow to define authentication methods and provide certificate management for mTLS auth
-
-## HMCP Protocol In-Depth
-
-The aspects which we need to take care of are:
-- Authentication & Authorization
-    - Auth can be OAuth 2.0 or mTLS
-- Guardrails
-    - Define few example guardrails
-- Logging/Auditing
-- Agent Discovery
-- Foundational LLM's discoverability
-- Capabilities
-- Registration of 3rd party agents
-- Certificate management
-
 ### Authentication & Scopes
 We will use OAuth 2.0 protocol when authentication is needed where end user token is needed. [OAuth Flow](./auth.md)
 
@@ -96,8 +52,6 @@ If service to service communication is needed then we will use mTLS.
 For guardrails we will use the Nvidia Nemo Guardrails library. Guardrails need to be defined 
 
 Example [Validate LLM output against journals](./guardrails.md)
-
-### Discoverability
 
 ### Patient Context
 
