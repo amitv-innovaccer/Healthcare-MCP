@@ -1,98 +1,45 @@
+# HMCP Specification
+
+Healthcare Model Context Protocol (HMCP) expands on base [MCP](https://modelcontextprotocol.io/specification/2025-03-26) by adding the below enhancements:
+- [Mandatory Authentication, Authorization & Scopes](#authentication--scopes)
+    - Auth can be OAuth 2.0 or mTLS
+- [Patient Context](#patient-context)
+- [Guardrails](#guardrails)
+    - Define few example guardrails
+- Logging/Auditing
+- [Bidirectional agent to agent communication](#bi-directional-agent-to-agent-communication)
+
 ## Architecture Components
 
 ### Diagram
 
 ```mermaid
 ---
-title: Building AI Agents with Healthcare MCP Protocol and Server
+Title: Health MCP in action
 ---
-graph TB
-    subgraph 3rd party AI Agent
-        AIA[AI Agent]
-        subgraph CLISDK[Health MCP Client SDK]
-            CE1[MCP Client]
-        end
-        AIA <--> CLISDK
-    end
-
-    subgraph Innovaccer AI Cloud
-
-        subgraph DevTools
-            AIAB[AI Agent Builder]
-            DEVGB[Guardrails Builder]
-            DEVRAG[RAG Data Store Builder]
-        end
-        
-
-        subgraph CORE[MCP Core]
-            Auth
-            Logging
-            Audit
-            Guardrails
-        end
-
-        subgraph Innovaccer MCP Server
-            subgraph GATE[MCP Gateway]
-            end
-
-            EP2[MCP Endpoint]
-            RE2[Voice Agent System]
-            %%RE2@{ shape: fr-rect }
-            EP2 <--> RE2
-
-            EP1[MCP Endpoint]
-            RE1[(Patient Data Store)]
-            EP1 <--> RE1
-
-            EP3[MCP Endpoint]
-            RE3[EHR Writeback]
-            %%RE3@{ shape: fr-rect }
-            EP3 <--> RE3
-
-            EP4[MCP Endpoint]
-            RE4[EHR Read Agent]
-            %%RE4@{ shape: fr-rect }
-            EP4 <--> RE4
-
-            EP5[MCP Endpoint]
-            RE5[EMPI]
-            %%RE5@{ shape: fr-rect }
-            EP5 <--> RE5
-
-            EP6[MCP Endpoint]
-            EP7[MCP Endpoint]
-
-            EP8[MCP Endpoint]
-            RE8[(RAG/Vector<br>Data Store)]
-            EP8 <--> RE8
-        end
-
-        subgraph MS[Model Store]
-            FLLM[Foundational LLM]
-            SLM
-            CM[Custom Models]
+graph LR
+    subgraph HS[Health System]
+        subgraph AIA[AI Agent]
         end
     end
 
-    subgraph 3rd party cloud
-        3P1[(Data Store)]
-        3P2[Clinical Algorithm]
-        %%3P2@{ shape: fr-rect }
+    subgraph HMCP Server
+        subgraph GATE[HMCP Gateway]
+        end
+        subgraph IMA[Agents]
+        end
+        AIA <--> |HMCP| GATE
+        GATE <--> |HMCP| IMA
     end
 
-    AIA <--> MS
-    CLISDK <--> GATE
-    GATE <--> |Auth, Logging, Audit, Guardrails <br> **Health MCP Protocol**| CORE
-    GATE <--> |Identify patient and call context|EP2
-    GATE <--> |Get Patient Details| EP1
-    GATE <--> |Read from EHR| EP4
-    GATE <--> |Write to EHR| EP3
-    GATE <--> |Get EMPI ID| EP5
-    GATE <--> |Get data from 3rd party server| EP6
-    GATE <--> |Get results from 3rd party <br>clinical algorithm| EP7
-    GATE <--> EP8
-    EP6 <--> 3P1
-    EP7 <--> 3P2
+    subgraph 3PP[3rd party platform]
+        subgraph 3PDS[Data store]
+        end
+        subgraph 3PALGO[Clinical Algorithm]
+        end
+        GATE <--> |HMCP|3PDS
+        GATE <--> |HMCP|3PALGO
+    end
 ```
 
 ### Agent Card
@@ -155,3 +102,16 @@ Example [Validate LLM output against journals](./guardrails.md)
 ### Patient Context
 
 [Details](./context.md)
+
+### Bi-directional agent to agent communication
+
+[Sampling](./sampling.md)
+
+### TODO:
+
+- Add JSON specification
+- Add ability to define guardrails in specification/ or in experimental capabilities
+- Publish agent card
+- Add capability negotiation in client for sampling
+- Added section on bi-directional agent communication
+- Add a sequence diagram showing the complete flow with auth and guardrails

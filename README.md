@@ -1,3 +1,5 @@
+![image info](./images/HMCP_Logo_Black.png)
+
 # Healthcare Model Context Protocol (HMCP)
 
 **_An open protocol enabling communication and interoperability between healthcare agentic applications._**
@@ -25,36 +27,7 @@ Built upon the robust foundation of MCP, HMCP introduces essential healthcare-sp
 
 **_Think of HMCP as the "universal connector" for healthcare AI—a trusted, standardized way to ensure seamless interoperability._**
 
-
-
-```mermaid
----
-Title: Health MCP in action
----
-graph LR
-    subgraph HS[Health System]
-        subgraph AIA[AI Agent]
-        end
-    end
-
-    subgraph HMCP Server
-        subgraph GATE[HMCP Gateway]
-        end
-        subgraph IMA[MCP Agents]
-        end
-        AIA <--> |HMCP Protocol| GATE
-        GATE <--> IMA
-    end
-
-    subgraph 3PP[3rd party platform]
-        subgraph 3PDS[Data store]
-        end
-        subgraph 3PALGO[Clinical Algorithm]
-        end
-        GATE <--> |HMCP Protocol|3PDS
-        GATE <--> |HMCP Protocol|3PALGO
-    end
-```
+![image info](./images/HMCP_In_Action.png)
 
 ## Specification
 
@@ -67,3 +40,13 @@ graph LR
 ## Examples
 
 [Examples](./examples/README.md)
+
+## Contributing
+
+Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to contribute to this
+project.
+
+## License
+
+This project is licensed under the MIT License—see the [LICENSE](LICENSE) file for
+details.

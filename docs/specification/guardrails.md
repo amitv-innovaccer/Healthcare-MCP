@@ -1,6 +1,8 @@
 # Guardrails
 
-Guardrails are an important differentiator of the HMCP protocol. Below we show an example of how guardrails can be implemented using Nvidia Nemo Guardrails library.
+Guardrails are an important differentiator of the HMCP protocol. We define guardrails as part of the `experimetal` capabilities of client and server. You can configure the exact guardrail which needs to be executed for each input/output of the agent (client or server).
+
+Below we show an example of how guardrails can be implemented using Nvidia Nemo Guardrails library.
 
 ## Medical Journal Validation Flow
 
