@@ -9,7 +9,6 @@ Healthcare Model Context Protocol (HMCP) expands on base [MCP](https://modelcont
     - [Guardrails](#guardrails)
     - [Patient Context](#patient-context)
     - [Bi-directional agent to agent communication](#bi-directional-agent-to-agent-communication)
-    - [_TODO_:](#todo)
 
 ## Architecture Components
 
@@ -69,12 +68,3 @@ Example [Validate LLM output against journals](./guardrails.md)
 ### Bi-directional agent to agent communication
 
 [Sampling](./sampling.md)
-
-### _TODO_:
-
-- Add JSON specification
-- Add ability to define guardrails in specification/ or in experimental capabilities
-- Publish agent card
-- Add capability negotiation in client for sampling
-- Added section on bi-directional agent communication
-- Add a sequence diagram showing the complete flow with auth and guardrails
