@@ -1,13 +1,15 @@
 # HMCP Specification
 
 Healthcare Model Context Protocol (HMCP) expands on base [MCP](https://modelcontextprotocol.io/specification/2025-03-26) by adding the below enhancements:
-- [Authentication, Authorization & Scopes](#authentication--scopes)
-    - Auth can be OAuth 2.0 or mTLS
-- [Patient Context](#patient-context)
-- [Guardrails](#guardrails)
-    - Define few example guardrails
-- Logging/Auditing
-- [Bidirectional agent to agent communication](#bi-directional-agent-to-agent-communication)
+- [HMCP Specification](#hmcp-specification)
+  - [Architecture Components](#architecture-components)
+    - [Diagram](#diagram)
+    - [Authentication \& Scopes](#authentication--scopes)
+      - [Comparison of MCP vs HMCP Authentication](#comparison-of-mcp-vs-hmcp-authentication)
+    - [Guardrails](#guardrails)
+    - [Patient Context](#patient-context)
+    - [Bi-directional agent to agent communication](#bi-directional-agent-to-agent-communication)
+    - [_TODO_:](#todo)
 
 ## Architecture Components
 
@@ -43,9 +45,16 @@ graph LR
 ```
 
 ### Authentication & Scopes
-We will use OAuth 2.0 protocol when authentication is needed where end user token is needed. [OAuth Flow](./auth.md)
+HMCP implements OAuth 2.0 and OpenID Connect following the SMART on FHIR authorization framework model. This approach provides a standardized, secure method for healthcare applications to authenticate and obtain appropriately scoped access to clinical data.
 
-If service to service communication is needed then we will use mTLS.
+Two primary authentication mechanisms are supported:
+
+1. **OAuth 2.0 for user-mediated contexts** - When end-user consent and context is needed
+2. **mTLS (Mutual TLS)** - For secure service-to-service communication
+
+For detailed implementation examples and flows, see the [Authentication Implementation Guide](./auth.md).
+
+#### [Comparison of MCP vs HMCP Authentication](./hmcp_auth_vs_mcp_auth.md)
 
 ### Guardrails
 
@@ -61,7 +70,7 @@ Example [Validate LLM output against journals](./guardrails.md)
 
 [Sampling](./sampling.md)
 
-### TODO:
+### _TODO_:
 
 - Add JSON specification
 - Add ability to define guardrails in specification/ or in experimental capabilities

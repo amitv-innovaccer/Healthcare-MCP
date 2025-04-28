@@ -1,44 +1,130 @@
 # Authentication, Authorization & Scopes
 
-We will use OAuth 2.0 protocol when authentication is needed where end user consent is needed.
+HMCP adopts the SMART on FHIR authentication and authorization framework, which builds upon OAuth 2.0 and OpenID Connect standards to provide secure, standardized access to healthcare data.
 
-If service to service communication is needed then we will use mTLS. 
+## Authentication Flows
 
-## Example auth flow 
+HMCP supports two primary authentication flows:
+
+### 1. OAuth 2.0 Authorization Code Flow (User-Mediated)
+
+Used when an application needs to access data on behalf of a user. This flow requires user consent and authentication.
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant SMART_App as AI Agent
-    participant Auth_Server as HMCP Gateway
-    participant FHIR_Server as MCP Server
+    participant HMCP_Client as HMCP Client App
+    participant Auth_Server as Authorization Server
+    participant HMCP_Server as HMCP Server
 
-    User->>SMART_App: Open Application
-    SMART_App->>Auth_Server: Authorization Request (1)
-    Note right of SMART_App: GET /authorize?<br>response_type=code<br>client_id=CLIENT_ID<br>redirect_uri=REDIRECT_URI<br>scope=SCOPES<br>state=STATE
+    User->>HMCP_Client: Open Application
+    HMCP_Client->>Auth_Server: Authorization Request (1)
+    Note right of HMCP_Client: GET /authorize?<br>response_type=code<br>client_id=CLIENT_ID<br>redirect_uri=REDIRECT_URI<br>scope=REQUESTED_SCOPES<br>state=STATE<br>audience=HMCP_SERVER_URI<br>aud=HMCP_SERVER_URI
     Auth_Server->>User: Display Authorization Request (2)
-    User->>Auth_Server: Approve Authorization Request (3)
-    Auth_Server->>SMART_App: Authorization Response (4)
+    User->>Auth_Server: Authenticate & Approve Access (3)
+    Auth_Server->>HMCP_Client: Authorization Response (4)
     Note right of Auth_Server: REDIRECT_URI?<br>code=AUTH_CODE<br>state=STATE
-    SMART_App->>Auth_Server: Token Request (5)
-    Note right of SMART_App: POST /token<br>grant_type=authorization_code<br>code=AUTH_CODE<br>redirect_uri=REDIRECT_URI<br>client_id=CLIENT_ID<br>client_secret=CLIENT_SECRET
-    Auth_Server->>SMART_App: Token Response (6)
-    Note right of Auth_Server: {<br>access_token=ACCESS_TOKEN,<br>token_type=bearer,<br>expires_in=3600,<br>scope=SCOPES<br>}
-    SMART_App->>FHIR_Server: Request Patient Data (7)
-    Note right of SMART_App: GET /Patient/12345<br>Authorization: Bearer ACCESS_TOKEN
-    FHIR_Server->>SMART_App: Provide Patient Data (8)
-    SMART_App->>SMART_App: Compute BMI (9)
-    SMART_App->>User: Display BMI Result (10)
+    HMCP_Client->>Auth_Server: Token Request (5)
+    Note right of HMCP_Client: POST /token<br>grant_type=authorization_code<br>code=AUTH_CODE<br>redirect_uri=REDIRECT_URI<br>client_id=CLIENT_ID<br>client_secret=CLIENT_SECRET
+    Auth_Server->>HMCP_Client: Token Response (6)
+    Note right of Auth_Server: {<br>"access_token":"ACCESS_TOKEN",<br>"token_type":"bearer",<br>"expires_in":3600,<br>"scope":"GRANTED_SCOPES",<br>"id_token":"ID_TOKEN", // If OpenID Connect<br>"patient":"PATIENT_ID" // If patient context requested<br>}
+    HMCP_Client->>HMCP_Server: API Request with Access Token (7)
+    Note right of HMCP_Client: GET /api/resource<br>Authorization: Bearer ACCESS_TOKEN
+    HMCP_Server->>HMCP_Client: API Response (8)
 ```
 
-### Detailed Annotations for OAuth 2.0 Steps:
-1. *Authorization Request:* The AI Agent redirects the user to the HMCP Gateway with a request to authorize access. This includes parameters like response_type=code, client_id, redirect_uri, scope, and state.
-2. *Display Authorization Request:* The HMCP Gateway presents the user with a page to approve or deny the authorization request.
-3. *Approve Authorization Request:* The user approves the request, granting the application permission to access their data.
-4. *Authorization Response:* The HMCP Gateway redirects the user back to the AI Agent with an authorization code and the original state parameter.
-5. *Token Request:* The AI Agent sends a POST request to the HMCP Gateway's token endpoint to exchange the authorization code for an access token. This request includes the grant_type=authorization_code, code, redirect_uri, client_id, and client_secret.
-6. *Token Response:* The HMCP Gateway responds with a JSON object containing the access_token, token_type, expires_in, and scope.
-7. *Request Patient Data:* The AI Agent uses the access token to request patient data from the MCP server, including the Authorization: Bearer ACCESS_TOKEN header.
-8. *Provide Patient Data:* The MCP server responds with the requested patient data, such as height and weight.
-9. *Compute BMI:* The AI Agent computes the BMI using the retrieved data.
-10. *Display BMI Result:* Finally, the AI Agent displays the computed BMI result to the user.
+### 2. Client Credentials Flow (Service-to-Service)
+
+Used for server-to-server authentication with no user involvement, typically with additional security like mTLS.
+
+```mermaid
+sequenceDiagram
+    participant Client_Service as Client Service
+    participant Auth_Server as Authorization Server
+    participant HMCP_Server as HMCP Server
+
+    Client_Service->>Auth_Server: Token Request (1)
+    Note right of Client_Service: POST /token<br>grant_type=client_credentials<br>client_id=CLIENT_ID<br>client_secret=CLIENT_SECRET<br>scope=REQUESTED_SCOPES
+    Auth_Server->>Client_Service: Token Response (2)
+    Note right of Auth_Server: {<br>"access_token":"ACCESS_TOKEN",<br>"token_type":"bearer",<br>"expires_in":3600,<br>"scope":"GRANTED_SCOPES"<br>}
+    Client_Service->>HMCP_Server: API Request with Access Token (3) 
+    Note right of Client_Service: POST /api/resource<br>Authorization: Bearer ACCESS_TOKEN
+    HMCP_Server->>Client_Service: API Response (4)
+```
+
+## Scopes in HMCP
+
+HMCP uses scopes to control access permissions, following SMART on FHIR conventions:
+
+### Scope Format
+
+Scopes follow this format pattern:
+```
+[patient/][(read|write)].[resource]
+```
+
+Where:
+- `patient/` prefix (optional): Restricts access to resources associated with the current patient context
+- `read` or `write`: Indicates permission level
+- `resource`: Specifies the resource type or action allowed
+
+### Standard Scopes
+
+| Scope | Description |
+|-------|-------------|
+| `hmcp:access` | Basic access to HMCP services |
+| `hmcp:read` | Read access to HMCP resources |
+| `hmcp:write` | Write access to HMCP resources |
+| `patient/hmcp:read` | Read access limited to the current patient context |
+| `patient/hmcp:write` | Write access limited to the current patient context |
+| `openid` | Authentication using OpenID Connect |
+| `profile` | Access to basic user profile information |
+| `launch/patient` | Request patient context at launch time |
+| `offline_access` | Request a refresh token for offline access |
+
+### Patient Context in Scopes
+
+For patient-specific operations, HMCP supports patient-context scopes. When using patient-context scopes:
+
+1. The client requests both the resource scope with the `patient/` prefix and the `launch/patient` scope
+2. The authorization server includes a `patient` parameter in the token response containing the patient ID
+3. All operations using that token are automatically restricted to the specified patient
+
+## OpenID Connect Integration
+
+HMCP supports OpenID Connect for authentication with these features:
+
+1. **ID Token**: Contains claims about user authentication and basic user identity
+2. **UserInfo Endpoint**: Provides additional user attributes when requested
+3. **Standard Claims**: Includes SMART on FHIR and healthcare-specific claims in tokens
+
+To use OpenID Connect, include the `openid` scope in the authorization request along with any additional profile scopes.
+
+## JWT Format and Claims
+
+HMCP access tokens are JWTs with these standard claims:
+
+```json
+{
+  "iss": "https://authorization-server.example.com",
+  "sub": "user-or-client-id",
+  "aud": "https://hmcp-server.example.com",
+  "exp": 1656086400,
+  "iat": 1656082800,
+  "scope": "hmcp:read patient/hmcp:write",
+  "patient": "123456",
+  "tenant": "organization-id",
+  "acr": "level-of-assurance",
+  "fhirUser": "Practitioner/789"
+}
+```
+
+## Token Storage and Security
+
+Clients must securely store tokens following these guidelines:
+
+1. Store access tokens in memory when possible, not in localStorage or cookies
+2. For native apps, use secure operating system credential storage
+3. Use refresh tokens to obtain new access tokens instead of long-lived tokens
+4. Implement proper token validation on both client and server sides
+5. Verify all claims, including audience (`aud`) and issuer (`iss`)
