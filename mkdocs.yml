@@ -10,10 +10,21 @@ theme:
     - search.suggest
 docs_dir: docs
 
+markdown_extensions:
+  - pymdownx.superfences:
+      # make exceptions to highlighting of code:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid
+
+plugins:
+  - search:
+      lang: en
+  - mermaid2
+
 nav:
   - Home: index.md
-  - Examples: ../examples/README.md
-  - HCMP SDK: ../src/hmcp/README.md
   - Specification:
       - Introduction: specification/index.md
       - Context: specification/context.md
@@ -21,6 +32,9 @@ nav:
       - HMCP Auth vs MCP Auth: specification/hmcp_auth_vs_mcp_auth.md
       - Guardrails: specification/guardrails.md
       - Sampling: specification/sampling.md
+  - SDK:
+      - HMCP Python SDK: specification/hmcp_python_sdk.md
+      - HMCP Examples: specification/examples.md
   - Tutorial:
       - Introduction: tutorial/index.md
       - 01 HMCP Server: tutorial/01_hmcp_server_.md

@@ -1,6 +1,7 @@
 # HMCP Specification
 
 Healthcare Model Context Protocol (HMCP) expands on base [MCP](https://modelcontextprotocol.io/specification/2025-03-26) by adding the below enhancements:
+
 - [HMCP Specification](#hmcp-specification)
   - [Architecture Components](#architecture-components)
     - [Diagram](#diagram)
