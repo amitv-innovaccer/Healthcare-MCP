@@ -1,179 +1,97 @@
 
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
-        <link rel="canonical" href="https://amitv-innovaccer.github.io/Healthcare-MCP/tutorial/04_sampling_functionality_/">
-      
-      
-        <link rel="prev" href="../03_authentication__oauth___jwt__/">
-      
-      
-        <link rel="next" href="../05_guardrails_/">
-      
-      
-      <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
-    
-    
-      
-        <title>04 Sampling Functionality - Healthcare-MCP Docs</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
-      
-      
+<!DOCTYPE html>
 
-
-    
-    
-      
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
-
-    
-    
-    
-  </head>
-  
-  
-    <body dir="ltr">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#chapter-4-sampling-functionality" class="md-skip">
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://amitv-innovaccer.github.io/Healthcare-MCP/tutorial/04_sampling_functionality_/" rel="canonical"/>
+<link href="../03_authentication__oauth___jwt__/" rel="prev"/>
+<link href="../05_guardrails_/" rel="next"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.6.12" name="generator"/>
+<title>04 Sampling Functionality - Healthcare-MCP Docs</title>
+<link href="../../assets/stylesheets/main.2afb09e1.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#chapter-4-sampling-functionality">
           Skip to content
         </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
-
+</div>
+<div data-md-component="announce">
+</div>
 <header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Healthcare-MCP Docs" class="md-header__button md-logo" aria-label="Healthcare-MCP Docs" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Healthcare-MCP Docs" class="md-header__button md-logo" data-md-component="logo" href="../.." title="Healthcare-MCP Docs">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
             Healthcare-MCP Docs
           </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
             
               04 Sampling Functionality
             
           </span>
-        </div>
-      </div>
-    </div>
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-    
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
+</div>
+</div>
+</div>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+<div class="md-search__suggest" data-md-component="search-suggest"></div>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+<ol class="md-search-result__list" role="presentation"></ol>
 </div>
-      
-    
-    
-  </nav>
-  
+</div>
+</div>
+</div>
+</div>
+</nav>
 </header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+<div class="md-container" data-md-component="container">
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../..">
         
   
   
@@ -182,790 +100,347 @@
   Home
 
       </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../../examples/README.md" class="md-tabs__link">
-        
-  
-  
-    
-  
-  Examples
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../../src/hmcp/README.md" class="md-tabs__link">
-        
-  
-  
-    
-  
-  HCMP SDK
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../specification/" class="md-tabs__link">
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../specification/">
           
   
   
   Specification
 
         </a>
-      </li>
-    
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../specification/hmcp_python_sdk/">
+          
   
+  
+  SDK
 
-      
-        
-  
-  
-  
-    
-  
-  
-    
-    
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+        </a>
+</li>
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../">
           
   
   
   Tutorial
 
         </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
+</li>
+</ul>
+</div>
 </nav>
-          
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-  
-
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Healthcare-MCP Docs" class="md-nav__button md-logo" aria-label="Healthcare-MCP Docs" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Healthcare-MCP Docs" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="Healthcare-MCP Docs">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
     Healthcare-MCP Docs
   </label>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+<span class="md-ellipsis">
     Home
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../examples/README.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Examples
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../src/hmcp/README.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    HCMP SDK
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis">
     Specification
     
   </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
             Specification
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../specification/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/">
+<span class="md-ellipsis">
     Introduction
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../specification/context/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/context/">
+<span class="md-ellipsis">
     Context
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../specification/auth/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/auth/">
+<span class="md-ellipsis">
     Auth
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../specification/hmcp_auth_vs_mcp_auth/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/hmcp_auth_vs_mcp_auth/">
+<span class="md-ellipsis">
     HMCP Auth vs MCP Auth
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../specification/guardrails/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/guardrails/">
+<span class="md-ellipsis">
     Guardrails
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../specification/sampling/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/sampling/">
+<span class="md-ellipsis">
     Sampling
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
+    SDK
     
-      
-      
-  
-  
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            SDK
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/hmcp_python_sdk/">
+<span class="md-ellipsis">
+    HMCP Python SDK
     
-  
-  
-  
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/examples/">
+<span class="md-ellipsis">
+    HMCP Examples
     
-    
-    
-    
-      
-        
-        
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+<span class="md-ellipsis">
     Tutorial
     
   </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
             Tutorial
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../">
+<span class="md-ellipsis">
     Introduction
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../01_hmcp_server_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../01_hmcp_server_/">
+<span class="md-ellipsis">
     01 HMCP Server
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../02_hmcp_client_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../02_hmcp_client_/">
+<span class="md-ellipsis">
     02 HMCP Client
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../03_authentication__oauth___jwt__/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    03 Authentication (OAuth & JWT)
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../03_authentication__oauth___jwt__/">
+<span class="md-ellipsis">
+    03 Authentication (OAuth &amp; JWT)
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
     04 Sampling Functionality
     
   </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
     04 Sampling Functionality
     
   </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#whats-the-big-idea-generating-text" class="md-nav__link">
-    <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#whats-the-big-idea-generating-text">
+<span class="md-ellipsis">
       What's the Big Idea? Generating Text!
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#how-the-client-asks-for-generated-text" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-the-client-asks-for-generated-text">
+<span class="md-ellipsis">
       How the Client Asks for Generated Text
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#how-the-server-generates-the-text-under-the-hood" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-the-server-generates-the-text-under-the-hood">
+<span class="md-ellipsis">
       How the Server Generates the Text (Under the Hood)
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#server-implementation-details" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#server-implementation-details">
+<span class="md-ellipsis">
       Server Implementation Details
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#conclusion" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#conclusion">
+<span class="md-ellipsis">
       Conclusion
     </span>
-  </a>
-  
+</a>
 </li>
-      
-    </ul>
-  
+</ul>
 </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../05_guardrails_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../05_guardrails_/">
+<span class="md-ellipsis">
     05 Guardrails
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../06_auth_configuration_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../06_auth_configuration_/">
+<span class="md-ellipsis">
     06 Auth Configuration
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../07_jwt_handler_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../07_jwt_handler_/">
+<span class="md-ellipsis">
     07 JWT Handler
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-  </ul>
+</a>
+</li>
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#whats-the-big-idea-generating-text" class="md-nav__link">
-    <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#whats-the-big-idea-generating-text">
+<span class="md-ellipsis">
       What's the Big Idea? Generating Text!
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#how-the-client-asks-for-generated-text" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-the-client-asks-for-generated-text">
+<span class="md-ellipsis">
       How the Client Asks for Generated Text
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#how-the-server-generates-the-text-under-the-hood" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-the-server-generates-the-text-under-the-hood">
+<span class="md-ellipsis">
       How the Server Generates the Text (Under the Hood)
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#server-implementation-details" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#server-implementation-details">
+<span class="md-ellipsis">
       Server Implementation Details
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#conclusion" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#conclusion">
+<span class="md-ellipsis">
       Conclusion
     </span>
-  </a>
-  
+</a>
 </li>
-      
-    </ul>
-  
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset">
-                
-                  
-
-
-
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
 <h1 id="chapter-4-sampling-functionality">Chapter 4: Sampling Functionality</h1>
 <p>In <a href="../03_authentication__oauth___jwt__/">Chapter 3: Authentication (OAuth &amp; JWT)</a>, we learned how our client application proves its identity to the HMCP Server using secure tokens, ensuring only authorized applications can communicate. Now that the client has the key to the door, what special services can it access?</p>
 <p>One of the most powerful and unique features the HMCP Server offers is the ability to <strong>generate new text</strong>. This isn't just about fetching existing files or data; it's about <em>creating</em> content. We call this <strong>Sampling Functionality</strong>.</p>
@@ -983,33 +458,33 @@
 <p>The HMCP Server acts like that creative assistant. The <a href="../02_hmcp_client_/">HMCP Client</a> knows how to make these creative requests, and the <a href="../01_hmcp_server_/">HMCP Server</a> knows how to fulfill them using its configured text generation capabilities (often powered by an AI language model).</p>
 <h2 id="how-the-client-asks-for-generated-text">How the Client Asks for Generated Text</h2>
 <p>As we saw briefly in <a href="../02_hmcp_client_/">Chapter 2: HMCP Client</a>, the client uses the <code>create_message</code> method to ask the server to generate text. Let's look at a simple example again:</p>
-<pre><code class="language-python"># Assume 'hmcp_client' is an authenticated HMCPClient instance
-import mcp.types as types
-import asyncio
+<div class="highlight"><pre><span></span><code><span class="c1"># Assume 'hmcp_client' is an authenticated HMCPClient instance</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mcp.types</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">types</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
 
-async def ask_for_summary():
-    # The context or prompt for the server
-    messages_to_send = [
-        types.SamplingMessage(role=&quot;user&quot;, content=&quot;Summarize this note in one sentence: Patient reported mild headache after starting new medication Lisinopril. Vitals stable. No other complaints.&quot;)
-    ]
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">ask_for_summary</span><span class="p">():</span>
+    <span class="c1"># The context or prompt for the server</span>
+    <span class="n">messages_to_send</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">types</span><span class="o">.</span><span class="n">SamplingMessage</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s2">"user"</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s2">"Summarize this note in one sentence: Patient reported mild headache after starting new medication Lisinopril. Vitals stable. No other complaints."</span><span class="p">)</span>
+    <span class="p">]</span>
 
-    print(&quot;Asking server for a summary...&quot;)
-    # Send the request using the client
-    response = await hmcp_client.create_message(
-        messages=messages_to_send,
-        maxTokens=30 # Ask for a short response
-    )
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Asking server for a summary..."</span><span class="p">)</span>
+    <span class="c1"># Send the request using the client</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">hmcp_client</span><span class="o">.</span><span class="n">create_message</span><span class="p">(</span>
+        <span class="n">messages</span><span class="o">=</span><span class="n">messages_to_send</span><span class="p">,</span>
+        <span class="n">maxTokens</span><span class="o">=</span><span class="mi">30</span> <span class="c1"># Ask for a short response</span>
+    <span class="p">)</span>
 
-    # Check the result
-    if isinstance(response, types.CreateMessageResult):
-        summary = response.choices[0].message.content
-        print(f&quot;Server's Summary: {summary}&quot;)
-    else:
-        print(f&quot;Error: {response.message}&quot;)
+    <span class="c1"># Check the result</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">CreateMessageResult</span><span class="p">):</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Server's Summary: </span><span class="si">{</span><span class="n">summary</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-# To run this async function:
-# asyncio.run(ask_for_summary())
-</code></pre>
+<span class="c1"># To run this async function:</span>
+<span class="c1"># asyncio.run(ask_for_summary())</span>
+</code></pre></div>
 <p><strong>Explanation:</strong></p>
 <ol>
 <li><strong><code>messages_to_send</code></strong>: This list provides the context or instruction. We include a message with <code>role="user"</code> containing the text we want summarized.</li>
@@ -1026,9 +501,9 @@ async def ask_for_summary():
 </li>
 </ol>
 <p><strong>Example Output:</strong></p>
-<pre><code>Asking server for a summary...
+<div class="highlight"><pre><span></span><code>Asking server for a summary...
 Server's Summary: The patient experienced a mild headache after starting Lisinopril but had stable vitals.
-</code></pre>
+</code></pre></div>
 <p><em>(The exact wording depends on the AI model configured on the server.)</em></p>
 <p>This <code>create_message</code> call is the client's way of triggering the server's unique Sampling Functionality.</p>
 <h2 id="how-the-server-generates-the-text-under-the-hood">How the Server Generates the Text (Under the Hood)</h2>
@@ -1044,7 +519,7 @@ Server's Summary: The patient experienced a mild headache after starting Lisinop
 <li><strong>Response Sent:</strong> The server sends the <code>CreateMessageResult</code> back to the client.</li>
 </ol>
 <p><strong>Sequence Diagram:</strong></p>
-<pre><code class="language-mermaid">sequenceDiagram
+<div class="mermaid">sequenceDiagram
     participant Client as HMCP Client
     participant Server as HMCP Server
     participant Auth as Auth Middleware
@@ -1061,47 +536,47 @@ Server's Summary: The patient experienced a mild headache after starting Lisinop
     Handler-&gt;&gt;Handler: Format as CreateMessageResult
     Handler--&gt;&gt;-Server: Pass result back
     Server--&gt;&gt;-Client: Send CreateMessageResult
-</code></pre>
+</div>
 <h2 id="server-implementation-details">Server Implementation Details</h2>
 <p>How does the server <em>know</em> how to generate text? It relies on the <code>samplingCallback</code> function provided during its setup.</p>
 <p><strong>1. Providing the Callback:</strong></p>
 <p>When you create an instance of <code>HMCPServer</code>, you can pass your own custom function to handle the text generation logic.</p>
-<pre><code class="language-python"># --- Define your text generation logic ---
-# (This is just a simple example; real logic might call an AI API)
-async def my_custom_text_generator(context, params):
-    # 'context' has info about the request
-    # 'params' has messages, maxTokens, etc.
-    user_prompt = params.messages[-1].content # Get the last user message
+<div class="highlight"><pre><span></span><code><span class="c1"># --- Define your text generation logic ---</span>
+<span class="c1"># (This is just a simple example; real logic might call an AI API)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">my_custom_text_generator</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="c1"># 'context' has info about the request</span>
+    <span class="c1"># 'params' has messages, maxTokens, etc.</span>
+    <span class="n">user_prompt</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">messages</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">content</span> <span class="c1"># Get the last user message</span>
 
-    # Simulate generating a response
-    generated_text = f&quot;I received your prompt: '{user_prompt}'. Here is a generated response.&quot;
+    <span class="c1"># Simulate generating a response</span>
+    <span class="n">generated_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"I received your prompt: '</span><span class="si">{</span><span class="n">user_prompt</span><span class="si">}</span><span class="s2">'. Here is a generated response."</span>
 
-    # Return the standard result format
-    return types.CreateMessageResult(
-        choices=[
-            types.SamplingChoice(
-                index=0,
-                message=types.SamplingMessage(role=&quot;assistant&quot;, content=generated_text)
-            )
-        ]
-    )
+    <span class="c1"># Return the standard result format</span>
+    <span class="k">return</span> <span class="n">types</span><span class="o">.</span><span class="n">CreateMessageResult</span><span class="p">(</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">types</span><span class="o">.</span><span class="n">SamplingChoice</span><span class="p">(</span>
+                <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">message</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">SamplingMessage</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s2">"assistant"</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">generated_text</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
 
-# --- Create the server, passing the callback ---
-from hmcp.mcpserver.hmcp_server import HMCPServer
-# Assume 'auth_config' is defined as in Chapter 3
+<span class="c1"># --- Create the server, passing the callback ---</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hmcp.mcpserver.hmcp_server</span><span class="w"> </span><span class="kn">import</span> <span class="n">HMCPServer</span>
+<span class="c1"># Assume 'auth_config' is defined as in Chapter 3</span>
 
-hmcp_server = HMCPServer(
-    name=&quot;My Generating Server&quot;,
-    host=&quot;127.0.0.1&quot;,
-    port=8050,
-    auth_config=auth_config, # Authentication settings
-    samplingCallback=my_custom_text_generator # Plug in our logic!
-)
+<span class="n">hmcp_server</span> <span class="o">=</span> <span class="n">HMCPServer</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"My Generating Server"</span><span class="p">,</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">"127.0.0.1"</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">8050</span><span class="p">,</span>
+    <span class="n">auth_config</span><span class="o">=</span><span class="n">auth_config</span><span class="p">,</span> <span class="c1"># Authentication settings</span>
+    <span class="n">samplingCallback</span><span class="o">=</span><span class="n">my_custom_text_generator</span> <span class="c1"># Plug in our logic!</span>
+<span class="p">)</span>
 
-# Now, when this server runs and receives a CreateMessageRequest,
-# it will call 'my_custom_text_generator'.
-# hmcp_server.run()
-</code></pre>
+<span class="c1"># Now, when this server runs and receives a CreateMessageRequest,</span>
+<span class="c1"># it will call 'my_custom_text_generator'.</span>
+<span class="c1"># hmcp_server.run()</span>
+</code></pre></div>
 <p><strong>Explanation:</strong></p>
 <ul>
 <li>We define an <code>async</code> function <code>my_custom_text_generator</code> that matches the required signature (<code>context</code>, <code>params</code>).</li>
@@ -1113,20 +588,20 @@ hmcp_server = HMCPServer(
 <p><strong>2. Registering the Handler:</strong></p>
 <p>Internally, the <code>HMCPServer</code> uses a method called <code>_registerSamplingHandler</code> during its initialization.</p>
 <p><em>(See <code>src/hmcp/mcpserver/hmcp_server.py</code>)</em></p>
-<pre><code class="language-python"># Inside HMCPServer class in src/hmcp/mcpserver/hmcp_server.py
-    def _registerSamplingHandler(self):
-        # Define the internal handler function
-        async def samplingHandler(req: types.CreateMessageRequest):
-            ctx = self._mcp_server.request_context # Get request details
-            # &gt;&gt;&gt; Call the stored _samplingCallback function &lt;&lt;&lt;
-            response = await self._samplingCallback(ctx, req.params) 
-            # ... format the response ...
-            return formatted_response # e.g., ServerResult(response) or ErrorData
+<div class="highlight"><pre><span></span><code><span class="c1"># Inside HMCPServer class in src/hmcp/mcpserver/hmcp_server.py</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_registerSamplingHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Define the internal handler function</span>
+        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">samplingHandler</span><span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">CreateMessageRequest</span><span class="p">):</span>
+            <span class="n">ctx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mcp_server</span><span class="o">.</span><span class="n">request_context</span> <span class="c1"># Get request details</span>
+            <span class="c1"># &gt;&gt;&gt; Call the stored _samplingCallback function &lt;&lt;&lt;</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_samplingCallback</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">params</span><span class="p">)</span> 
+            <span class="c1"># ... format the response ...</span>
+            <span class="k">return</span> <span class="n">formatted_response</span> <span class="c1"># e.g., ServerResult(response) or ErrorData</span>
 
-        # Tell the underlying MCP server:
-        # When a 'CreateMessageRequest' arrives, use 'samplingHandler'
-        self._mcp_server.request_handlers[types.CreateMessageRequest] = samplingHandler
-</code></pre>
+        <span class="c1"># Tell the underlying MCP server:</span>
+        <span class="c1"># When a 'CreateMessageRequest' arrives, use 'samplingHandler'</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mcp_server</span><span class="o">.</span><span class="n">request_handlers</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">CreateMessageRequest</span><span class="p">]</span> <span class="o">=</span> <span class="n">samplingHandler</span>
+</code></pre></div>
 <p><strong>Explanation:</strong></p>
 <ul>
 <li>This code (simplified) runs when the <code>HMCPServer</code> starts.</li>
@@ -1137,93 +612,63 @@ hmcp_server = HMCPServer(
 <p>This mechanism connects the incoming client request (<code>CreateMessageRequest</code>) to the specific text generation logic (<code>samplingCallback</code>) you defined for your server.</p>
 <p><strong>3. Client Side (<code>create_message</code>):</strong></p>
 <p>Just to recap the client side from <code>src/hmcp/mcpclient/hmcp_client.py</code>:</p>
-<pre><code class="language-python"># Inside HMCPClient class in src/hmcp/mcpclient/hmcp_client.py
-    async def create_message(
-        self, 
-        messages: List[types.SamplingMessage],
-        # ... other parameters ...
-    ) -&gt; Union[types.CreateMessageResult, types.ErrorData]:
+<div class="highlight"><pre><span></span><code><span class="c1"># Inside HMCPClient class in src/hmcp/mcpclient/hmcp_client.py</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">create_message</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">messages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">SamplingMessage</span><span class="p">],</span>
+        <span class="c1"># ... other parameters ...</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">CreateMessageResult</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">ErrorData</span><span class="p">]:</span>
 
-        # 1. Package parameters into standard format
-        params = types.CreateMessageRequestParams(...)
+        <span class="c1"># 1. Package parameters into standard format</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">CreateMessageRequestParams</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 
-        # 2. Create the request object with the specific method name
-        createMessageRequest = types.CreateMessageRequest(
-            method=&quot;sampling/createMessage&quot;, # The key method identifier
-            params=params
-        )
+        <span class="c1"># 2. Create the request object with the specific method name</span>
+        <span class="n">createMessageRequest</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">CreateMessageRequest</span><span class="p">(</span>
+            <span class="n">method</span><span class="o">=</span><span class="s2">"sampling/createMessage"</span><span class="p">,</span> <span class="c1"># The key method identifier</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span>
+        <span class="p">)</span>
 
-        # 3. Use the underlying session to send and wait for a response
-        return await self.session.send_request(
-            types.ClientRequest(createMessageRequest), 
-            types.CreateMessageResult # Expect this type of result (or ErrorData)
-        )
-</code></pre>
+        <span class="c1"># 3. Use the underlying session to send and wait for a response</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">send_request</span><span class="p">(</span>
+            <span class="n">types</span><span class="o">.</span><span class="n">ClientRequest</span><span class="p">(</span><span class="n">createMessageRequest</span><span class="p">),</span> 
+            <span class="n">types</span><span class="o">.</span><span class="n">CreateMessageResult</span> <span class="c1"># Expect this type of result (or ErrorData)</span>
+        <span class="p">)</span>
+</code></pre></div>
 <p>This shows how the client explicitly creates a request with <code>method="sampling/createMessage"</code>, which the server uses for routing, and expects a <code>CreateMessageResult</code> in return.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>In this chapter, we explored the core HMCP extension: <strong>Sampling Functionality</strong>. You learned that this isn't just about retrieving data, but about the server's unique ability to <em>generate</em> new text content based on client requests.</p>
 <p>We saw how the <a href="../02_hmcp_client_/">HMCP Client</a> uses the <code>create_message</code> method to send a <code>CreateMessageRequest</code> containing context and parameters. We then followed the request to the <a href="../01_hmcp_server_/">HMCP Server</a>, saw how it authenticates, routes the request, and invokes a specific <code>samplingCallback</code> function to perform the actual text generation. Finally, the server packages the result into a <code>CreateMessageResult</code> and sends it back.</p>
 <p>This powerful generation capability is central to HMCP's purpose in healthcare AI applications. However, generating text, especially in a sensitive domain like healthcare, requires careful control and safety measures. How can we ensure the generated content is appropriate, safe, and follows specific rules?</p>
 <p>That's where the next concept comes in. Let's explore how HMCP provides safety mechanisms in <a href="../05_guardrails_/">Chapter 5: Guardrails</a>!</p>
-
-
-
-
-
-
-
-
-
-
-
-
-                
-              </article>
-            </div>
-          
-          
+</article>
+</div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-        </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
   Back to top
 </button>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
   
   
     Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
       Material for MkDocs
     </a>
-  
 </div>
-      
-    </div>
-  </div>
+</div>
+</div>
 </footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    
-    
-    
-      
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
-    
-    
-      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
-      
-    
-  </body>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+<script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
+mermaid.initialize({});</script></body>
 </html>

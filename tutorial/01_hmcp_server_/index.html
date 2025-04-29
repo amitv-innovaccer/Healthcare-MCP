@@ -1,179 +1,97 @@
 
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
-        <link rel="canonical" href="https://amitv-innovaccer.github.io/Healthcare-MCP/tutorial/01_hmcp_server_/">
-      
-      
-        <link rel="prev" href="../">
-      
-      
-        <link rel="next" href="../02_hmcp_client_/">
-      
-      
-      <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
-    
-    
-      
-        <title>01 HMCP Server - Healthcare-MCP Docs</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
-      
-      
+<!DOCTYPE html>
 
-
-    
-    
-      
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
-
-    
-    
-    
-  </head>
-  
-  
-    <body dir="ltr">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#chapter-1-hmcp-server" class="md-skip">
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://amitv-innovaccer.github.io/Healthcare-MCP/tutorial/01_hmcp_server_/" rel="canonical"/>
+<link href="../" rel="prev"/>
+<link href="../02_hmcp_client_/" rel="next"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.6.12" name="generator"/>
+<title>01 HMCP Server - Healthcare-MCP Docs</title>
+<link href="../../assets/stylesheets/main.2afb09e1.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#chapter-1-hmcp-server">
           Skip to content
         </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
-
+</div>
+<div data-md-component="announce">
+</div>
 <header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Healthcare-MCP Docs" class="md-header__button md-logo" aria-label="Healthcare-MCP Docs" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Healthcare-MCP Docs" class="md-header__button md-logo" data-md-component="logo" href="../.." title="Healthcare-MCP Docs">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
             Healthcare-MCP Docs
           </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
             
               01 HMCP Server
             
           </span>
-        </div>
-      </div>
-    </div>
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-    
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
+</div>
+</div>
+</div>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+<div class="md-search__suggest" data-md-component="search-suggest"></div>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+<ol class="md-search-result__list" role="presentation"></ol>
 </div>
-      
-    
-    
-  </nav>
-  
+</div>
+</div>
+</div>
+</div>
+</nav>
 </header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+<div class="md-container" data-md-component="container">
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../..">
         
   
   
@@ -182,772 +100,347 @@
   Home
 
       </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../../examples/README.md" class="md-tabs__link">
-        
-  
-  
-    
-  
-  Examples
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../../src/hmcp/README.md" class="md-tabs__link">
-        
-  
-  
-    
-  
-  HCMP SDK
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../specification/" class="md-tabs__link">
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../specification/">
           
   
   
   Specification
 
         </a>
-      </li>
-    
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../specification/hmcp_python_sdk/">
+          
   
+  
+  SDK
 
-      
-        
-  
-  
-  
-    
-  
-  
-    
-    
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+        </a>
+</li>
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../">
           
   
   
   Tutorial
 
         </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
+</li>
+</ul>
+</div>
 </nav>
-          
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-  
-
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Healthcare-MCP Docs" class="md-nav__button md-logo" aria-label="Healthcare-MCP Docs" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Healthcare-MCP Docs" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="Healthcare-MCP Docs">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
     Healthcare-MCP Docs
   </label>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+<span class="md-ellipsis">
     Home
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../examples/README.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Examples
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../src/hmcp/README.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    HCMP SDK
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis">
     Specification
     
   </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
             Specification
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../specification/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/">
+<span class="md-ellipsis">
     Introduction
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../specification/context/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/context/">
+<span class="md-ellipsis">
     Context
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../specification/auth/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/auth/">
+<span class="md-ellipsis">
     Auth
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../specification/hmcp_auth_vs_mcp_auth/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/hmcp_auth_vs_mcp_auth/">
+<span class="md-ellipsis">
     HMCP Auth vs MCP Auth
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../specification/guardrails/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/guardrails/">
+<span class="md-ellipsis">
     Guardrails
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../specification/sampling/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/sampling/">
+<span class="md-ellipsis">
     Sampling
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
+    SDK
     
-      
-      
-  
-  
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            SDK
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/hmcp_python_sdk/">
+<span class="md-ellipsis">
+    HMCP Python SDK
     
-  
-  
-  
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../specification/examples/">
+<span class="md-ellipsis">
+    HMCP Examples
     
-    
-    
-    
-      
-        
-        
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+<span class="md-ellipsis">
     Tutorial
     
   </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
             Tutorial
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../">
+<span class="md-ellipsis">
     Introduction
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
     01 HMCP Server
     
   </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
     01 HMCP Server
     
   </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#whats-the-big-idea" class="md-nav__link">
-    <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#whats-the-big-idea">
+<span class="md-ellipsis">
       What's the Big Idea?
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-the-hmcp-server" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-is-the-hmcp-server">
+<span class="md-ellipsis">
       What is the HMCP Server?
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-started-running-a-basic-server" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#getting-started-running-a-basic-server">
+<span class="md-ellipsis">
       Getting Started: Running a Basic Server
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#how-it-works-under-the-hood" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-it-works-under-the-hood">
+<span class="md-ellipsis">
       How it Works Under the Hood
     </span>
-  </a>
-  
+</a>
 </li>
-      
-    </ul>
-  
+<li class="md-nav__item">
+<a class="md-nav__link" href="#conclusion">
+<span class="md-ellipsis">
+      Conclusion
+    </span>
+</a>
+</li>
+</ul>
 </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../02_hmcp_client_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../02_hmcp_client_/">
+<span class="md-ellipsis">
     02 HMCP Client
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../03_authentication__oauth___jwt__/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    03 Authentication (OAuth & JWT)
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../03_authentication__oauth___jwt__/">
+<span class="md-ellipsis">
+    03 Authentication (OAuth &amp; JWT)
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../04_sampling_functionality_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../04_sampling_functionality_/">
+<span class="md-ellipsis">
     04 Sampling Functionality
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../05_guardrails_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../05_guardrails_/">
+<span class="md-ellipsis">
     05 Guardrails
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../06_auth_configuration_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../06_auth_configuration_/">
+<span class="md-ellipsis">
     06 Auth Configuration
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../07_jwt_handler_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../07_jwt_handler_/">
+<span class="md-ellipsis">
     07 JWT Handler
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-  </ul>
+</a>
+</li>
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#whats-the-big-idea" class="md-nav__link">
-    <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#whats-the-big-idea">
+<span class="md-ellipsis">
       What's the Big Idea?
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-the-hmcp-server" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#what-is-the-hmcp-server">
+<span class="md-ellipsis">
       What is the HMCP Server?
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-started-running-a-basic-server" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#getting-started-running-a-basic-server">
+<span class="md-ellipsis">
       Getting Started: Running a Basic Server
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#how-it-works-under-the-hood" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-it-works-under-the-hood">
+<span class="md-ellipsis">
       How it Works Under the Hood
     </span>
-  </a>
-  
+</a>
 </li>
-      
-    </ul>
-  
+<li class="md-nav__item">
+<a class="md-nav__link" href="#conclusion">
+<span class="md-ellipsis">
+      Conclusion
+    </span>
+</a>
+</li>
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset">
-                
-                  
-
-
-
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
 <h1 id="chapter-1-hmcp-server">Chapter 1: HMCP Server</h1>
 <p>Welcome to the Healthcare-MCP project! We're excited to guide you through its core components. This first chapter introduces the <strong>HMCP Server</strong>, the central hub of our system.</p>
 <h2 id="whats-the-big-idea">What's the Big Idea?</h2>
@@ -965,26 +458,26 @@
 <p>It builds upon a more general <code>MCP Server</code> but adds these specific healthcare features, especially authentication and text generation (sampling).</p>
 <h2 id="getting-started-running-a-basic-server">Getting Started: Running a Basic Server</h2>
 <p>While a real-world server involves more setup (like authentication details), let's see the basic structure of how you might create and start an HMCP Server using the <code>HMCPServer</code> class.</p>
-<pre><code class="language-python"># Import the necessary class
-from hmcp.mcpserver.hmcp_server import HMCPServer
+<div class="highlight"><pre><span></span><code><span class="c1"># Import the necessary class</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hmcp.mcpserver.hmcp_server</span><span class="w"> </span><span class="kn">import</span> <span class="n">HMCPServer</span>
 
-# 1. Create an instance of the server
-#    We give it a name clients will see.
-#    We'll ignore auth_config and samplingCallback for now.
-hmcp_server = HMCPServer(
-    name=&quot;My First HMCP Server&quot;,
-    host=&quot;127.0.0.1&quot;,  # Listen only on the local machine
-    port=8050,         # The &quot;door number&quot; the server listens at
-    # auth_config=..., # We'll cover this later!
-    # samplingCallback=..., # And this too!
-)
+<span class="c1"># 1. Create an instance of the server</span>
+<span class="c1">#    We give it a name clients will see.</span>
+<span class="c1">#    We'll ignore auth_config and samplingCallback for now.</span>
+<span class="n">hmcp_server</span> <span class="o">=</span> <span class="n">HMCPServer</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"My First HMCP Server"</span><span class="p">,</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">"127.0.0.1"</span><span class="p">,</span>  <span class="c1"># Listen only on the local machine</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">8050</span><span class="p">,</span>         <span class="c1"># The "door number" the server listens at</span>
+    <span class="c1"># auth_config=..., # We'll cover this later!</span>
+    <span class="c1"># samplingCallback=..., # And this too!</span>
+<span class="p">)</span>
 
-# 2. Start the server (this would typically run forever)
-#    In a real script, you might use: hmcp_server.run()
-print(f&quot;Server '{hmcp_server.name}' would run on {hmcp_server.host}:{hmcp_server.port}&quot;)
-# In a real application, the next line would start the server loop:
-# hmcp_server.run()
-</code></pre>
+<span class="c1"># 2. Start the server (this would typically run forever)</span>
+<span class="c1">#    In a real script, you might use: hmcp_server.run()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Server '</span><span class="si">{</span><span class="n">hmcp_server</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">' would run on </span><span class="si">{</span><span class="n">hmcp_server</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">hmcp_server</span><span class="o">.</span><span class="n">port</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="c1"># In a real application, the next line would start the server loop:</span>
+<span class="c1"># hmcp_server.run()</span>
+</code></pre></div>
 <p><strong>Explanation:</strong></p>
 <ul>
 <li>We import the <code>HMCPServer</code> class.</li>
@@ -1011,7 +504,7 @@ print(f&quot;Server '{hmcp_server.name}' would run on {hmcp_server.host}:{hmcp_s
 </ol>
 <p><strong>Sequence Diagram:</strong></p>
 <p>Here's a visual representation of a client asking the server to generate text (sampling):</p>
-<pre><code class="language-mermaid">sequenceDiagram
+<div class="mermaid">sequenceDiagram
     participant C as Client
     participant Auth as AuthMiddleware
     participant HMCP as HMCP Server
@@ -1024,7 +517,7 @@ print(f&quot;Server '{hmcp_server.name}' would run on {hmcp_server.host}:{hmcp_s
     HMCP-&gt;&gt;+Sampler: Process Sampling Request (using samplingCallback)
     Sampler--&gt;&gt;-HMCP: Generated Text Result
     HMCP--&gt;&gt;-C: Send Response (Generated Text)
-</code></pre>
+</div>
 <p><strong>Key Code Components:</strong></p>
 <ul>
 <li>
@@ -1033,24 +526,23 @@ print(f&quot;Server '{hmcp_server.name}' would run on {hmcp_server.host}:{hmcp_s
 <li>Inherits from <code>FastMCP</code> (the base MCP server).</li>
 <li>The <code>__init__</code> method sets up the server name, address, port, authentication configuration (<a href="../06_auth_configuration_/">Auth Configuration</a>), and the crucial <code>samplingCallback</code>.</li>
 </ul>
-<p>```python</p>
-<h1 id="inside-srchmcpmcpserverhmcp_serverpy">Inside src/hmcp/mcpserver/hmcp_server.py</h1>
-<p>class HMCPServer(FastMCP):
-    def <strong>init</strong>(
-        self,
-        name: str,
-        host: str = "0.0.0.0",
-        port: int = 8050,
-        auth_config: Optional[AuthConfig] = None, # Authentication settings
-        samplingCallback: SamplingFnT | None = None, # Text generation logic
-        # ... other parameters
-    ):
-        super().<strong>init</strong>(name=name, host=host, port=port, ...) # Initialize base server
-        self.auth_config = auth_config or AuthConfig() # Setup auth
-        self._samplingCallback = samplingCallback or _default_sampling_callback # Store sampling logic
-        self._registerSamplingHandler() # Link sampling requests to the logic
-        # ... setup capabilities to tell clients we can do 'sampling'
-```</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Inside src/hmcp/mcpserver/hmcp_server.py</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">HMCPServer</span><span class="p">(</span><span class="n">FastMCP</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"0.0.0.0"</span><span class="p">,</span>
+        <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8050</span><span class="p">,</span>
+        <span class="n">auth_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AuthConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="c1"># Authentication settings</span>
+        <span class="n">samplingCallback</span><span class="p">:</span> <span class="n">SamplingFnT</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="c1"># Text generation logic</span>
+        <span class="c1"># ... other parameters</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span> <span class="c1"># Initialize base server</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth_config</span> <span class="o">=</span> <span class="n">auth_config</span> <span class="ow">or</span> <span class="n">AuthConfig</span><span class="p">()</span> <span class="c1"># Setup auth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_samplingCallback</span> <span class="o">=</span> <span class="n">samplingCallback</span> <span class="ow">or</span> <span class="n">_default_sampling_callback</span> <span class="c1"># Store sampling logic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_registerSamplingHandler</span><span class="p">()</span> <span class="c1"># Link sampling requests to the logic</span>
+        <span class="c1"># ... setup capabilities to tell clients we can do 'sampling'</span>
+</code></pre></div>
 </li>
 <li>
 <p><strong><code>AuthMiddleware</code> Class (<code>fastmcp_auth.py</code>):</strong></p>
@@ -1061,119 +553,87 @@ print(f&quot;Server '{hmcp_server.name}' would run on {hmcp_server.host}:{hmcp_s
 <li>If verification fails, it sends back a <code>401 Unauthorized</code> or <code>403 Forbidden</code> error.</li>
 <li>If successful, it adds user information (like <code>client_id</code> and <code>scopes</code>) to the request state for later use.</li>
 </ul>
-<p>```python</p>
-<h1 id="inside-srchmcpmcpserverfastmcp_authpy">Inside src/hmcp/mcpserver/fastmcp_auth.py</h1>
-<p>class AuthMiddleware(BaseHTTPMiddleware):
-    def <strong>init</strong>(self, app, auth_config: AuthConfig):
-        super().<strong>init</strong>(app)
-        self.auth_config = auth_config
-        self.jwt_handler = jwt_handler.JWTHandler(auth_config) # Uses the JWT Handler</p>
-<pre><code>async def dispatch(self, request: Request, call_next):
-    # Skip auth for login path
-    if request.url.path == self.auth_config.OAUTH_TOKEN_URL:
-        return await call_next(request)
+<div class="highlight"><pre><span></span><code><span class="c1"># Inside src/hmcp/mcpserver/fastmcp_auth.py</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AuthMiddleware</span><span class="p">(</span><span class="n">BaseHTTPMiddleware</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">auth_config</span><span class="p">:</span> <span class="n">AuthConfig</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth_config</span> <span class="o">=</span> <span class="n">auth_config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jwt_handler</span> <span class="o">=</span> <span class="n">jwt_handler</span><span class="o">.</span><span class="n">JWTHandler</span><span class="p">(</span><span class="n">auth_config</span><span class="p">)</span> <span class="c1"># Uses the JWT Handler</span>
 
-    auth_header = request.headers.get("Authorization")
-    if not auth_header:
-        # No credentials? Send 401 Error!
-        return JSONResponse(..., status_code=401)
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">call_next</span><span class="p">):</span>
+        <span class="c1"># Skip auth for login path</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">path</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_config</span><span class="o">.</span><span class="n">OAUTH_TOKEN_URL</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="n">call_next</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 
-    try:
-        token = utils.parse_auth_header(auth_header)
-        payload = self.jwt_handler.verify_token(token) # Verify!
-        # ... check client_id, scopes, patient_id ...
-        request.state.client_id = payload.get('sub') # Store client info
-        # ...
-        return await call_next(request) # Allow request to proceed
-    except (InvalidTokenError, ScopeError, Exception) as e:
-        # Problems? Send error response (401 or 403)
-        return JSONResponse(..., status_code=401 or 403)
-</code></pre>
-<p>```</p>
+        <span class="n">auth_header</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Authorization"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">auth_header</span><span class="p">:</span>
+            <span class="c1"># No credentials? Send 401 Error!</span>
+            <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">401</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">parse_auth_header</span><span class="p">(</span><span class="n">auth_header</span><span class="p">)</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jwt_handler</span><span class="o">.</span><span class="n">verify_token</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="c1"># Verify!</span>
+            <span class="c1"># ... check client_id, scopes, patient_id ...</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">client_id</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'sub'</span><span class="p">)</span> <span class="c1"># Store client info</span>
+            <span class="c1"># ...</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="n">call_next</span><span class="p">(</span><span class="n">request</span><span class="p">)</span> <span class="c1"># Allow request to proceed</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">InvalidTokenError</span><span class="p">,</span> <span class="n">ScopeError</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="c1"># Problems? Send error response (401 or 403)</span>
+            <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">401</span> <span class="ow">or</span> <span class="mi">403</span><span class="p">)</span>
+</code></pre></div>
 </li>
 <li>
 <p><strong><code>_registerSamplingHandler</code> Method (<code>hmcp_server.py</code>):</strong></p>
 <ul>
 <li>This internal method connects the specific MCP request type <code>CreateMessageRequest</code> (which clients use to ask for text generation) to the <code>_samplingCallback</code> function provided during server initialization.</li>
 </ul>
-<p>```python</p>
-<h1 id="inside-hmcpserver-class-in-srchmcpmcpserverhmcp_serverpy">Inside HMCPServer class in src/hmcp/mcpserver/hmcp_server.py</h1>
-<p>def _registerSamplingHandler(self):
-    async def samplingHandler(req: types.CreateMessageRequest):
-        ctx = self._mcp_server.request_context # Get request details
-        # Call the actual text generation logic
-        response = await self._samplingCallback(ctx, req.params)
-        # ... format the response ...
-        return formatted_response</p>
-<pre><code># Tell the underlying MCP server:
-# "When you get a CreateMessageRequest, call my samplingHandler function"
-self._mcp_server.request_handlers[types.CreateMessageRequest] = samplingHandler
-</code></pre>
-<p>```</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Inside HMCPServer class in src/hmcp/mcpserver/hmcp_server.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_registerSamplingHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">samplingHandler</span><span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">CreateMessageRequest</span><span class="p">):</span>
+        <span class="n">ctx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mcp_server</span><span class="o">.</span><span class="n">request_context</span> <span class="c1"># Get request details</span>
+        <span class="c1"># Call the actual text generation logic</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_samplingCallback</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+        <span class="c1"># ... format the response ...</span>
+        <span class="k">return</span> <span class="n">formatted_response</span>
+
+    <span class="c1"># Tell the underlying MCP server:</span>
+    <span class="c1"># "When you get a CreateMessageRequest, call my samplingHandler function"</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_mcp_server</span><span class="o">.</span><span class="n">request_handlers</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">CreateMessageRequest</span><span class="p">]</span> <span class="o">=</span> <span class="n">samplingHandler</span>
+</code></pre></div>
 </li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <p>You've just met the HMCP Server – the core engine of the Healthcare-MCP project. You learned that it's like a specialized help desk manager that listens for requests, checks credentials securely, handles standard tasks, and has the unique ability to <em>generate</em> text (sampling) for healthcare scenarios. We saw a glimpse of how to create a basic server instance and peeked under the hood at the key components like Authentication Middleware and the Sampling Handler registration.</p>
 <p>In the next chapter, we'll look at the other side of the coin: the application that <em>talks</em> to this server. Let's dive into the <a href="../02_hmcp_client_/">Chapter 2: HMCP Client</a>!</p>
-
-
-
-
-
-
-
-
-
-
-
-
-                
-              </article>
-            </div>
-          
-          
+</article>
+</div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-        </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
   Back to top
 </button>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
   
   
     Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
       Material for MkDocs
     </a>
-  
 </div>
-      
-    </div>
-  </div>
+</div>
+</div>
 </footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    
-    
-    
-      
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
-    
-    
-      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
-      
-    
-  </body>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+<script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
+mermaid.initialize({});</script></body>
 </html>
