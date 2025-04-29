@@ -1,4 +1,6 @@
-![image info](docs/images/Innovaccer_HMCP_Github_banner.png)
+# Welcome to Healthcare-MCP Docs
+
+![image info](./images/Innovaccer_HMCP_Github_banner.png)
 
 # Healthcare Model Context Protocol (HMCP)
 
@@ -30,7 +32,7 @@ These enhancements are being designed to ensure that HMCP can meet the unique re
 
 **_Think of HMCP as the "universal connector" for healthcare AI—a trusted, standardized way to ensure seamless interoperability._**
 
-![image info](docs/images/HMCP_In_Action.png)
+![image info](./images/HMCP_In_Action.png)
 
 ## Quick Start
 
@@ -131,15 +133,19 @@ For more detailed examples and advanced usage, see the [HMCP SDK documentation](
 
 ## Specification
 
-[Specification](./docs/specification/index.md)
+[Specification](specification/index.md) 
 
 ## HMCP SDK
 
-[HMCP SDK](./src/hmcp/README.md)
+[HMCP SDK](../src/hmcp/README.md)
 
 ## Examples
 
-[Examples](./examples/README.md)
+[Examples](../examples/README.md)
+
+## Tutorial
+
+[Tutorial](tutorial/index.md)
 
 ## Contributing
 
@@ -150,3 +156,9 @@ project.
 
 This project is licensed under the MIT License—see the [LICENSE](LICENSE) file for
 details.
+
+
+Explore the documentation:
+
+- [Specification](specification/index.md) 
+

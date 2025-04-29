@@ -1,0 +1,32 @@
+site_name: Healthcare-MCP Docs
+site_url: https://amitv-innovaccer.github.io/Healthcare-MCP/
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+docs_dir: docs
+
+nav:
+  - Home: index.md
+  - Examples: ../examples/README.md
+  - HCMP SDK: ../src/hmcp/README.md
+  - Specification:
+      - Introduction: specification/index.md
+      - Context: specification/context.md
+      - Auth: specification/auth.md
+      - HMCP Auth vs MCP Auth: specification/hmcp_auth_vs_mcp_auth.md
+      - Guardrails: specification/guardrails.md
+      - Sampling: specification/sampling.md
+  - Tutorial:
+      - Introduction: tutorial/index.md
+      - 01 HMCP Server: tutorial/01_hmcp_server_.md
+      - 02 HMCP Client: tutorial/02_hmcp_client_.md
+      - 03 Authentication (OAuth & JWT): tutorial/03_authentication__oauth___jwt__.md
+      - 04 Sampling Functionality: tutorial/04_sampling_functionality_.md
+      - 05 Guardrails: tutorial/05_guardrails_.md
+      - 06 Auth Configuration: tutorial/06_auth_configuration_.md
+      - 07 JWT Handler: tutorial/07_jwt_handler_.md
