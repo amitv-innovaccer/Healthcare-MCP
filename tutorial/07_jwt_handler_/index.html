@@ -1,0 +1,1209 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://amitv-innovaccer.github.io/Healthcare-MCP/tutorial/07_jwt_handler_/">
+      
+      
+        <link rel="prev" href="../06_auth_configuration_/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>07 JWT Handler - Healthcare-MCP Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-7-jwt-handler" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Healthcare-MCP Docs" class="md-header__button md-logo" aria-label="Healthcare-MCP Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Healthcare-MCP Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              07 JWT Handler
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../examples/README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Examples
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../src/hmcp/README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  HCMP SDK
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../specification/" class="md-tabs__link">
+          
+  
+  
+  Specification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Tutorial
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Healthcare-MCP Docs" class="md-nav__button md-logo" aria-label="Healthcare-MCP Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Healthcare-MCP Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../src/hmcp/README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HCMP SDK
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Specification
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Specification
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specification/context/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Context
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specification/auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Auth
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specification/hmcp_auth_vs_mcp_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HMCP Auth vs MCP Auth
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specification/guardrails/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guardrails
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specification/sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sampling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorial
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_hmcp_server_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    01 HMCP Server
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_hmcp_client_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    02 HMCP Client
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_authentication__oauth___jwt__/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    03 Authentication (OAuth & JWT)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_sampling_functionality_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    04 Sampling Functionality
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_guardrails_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    05 Guardrails
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_auth_configuration_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    06 Auth Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    07 JWT Handler
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    07 JWT Handler
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#whats-the-big-idea-the-security-pass-printer-scanner" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's the Big Idea? The Security Pass Printer &amp; Scanner
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-the-jwt-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is the JWT Handler?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-its-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      How It's Used
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works-under-the-hood-creation-and-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      How it Works Under the Hood: Creation and Verification
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#whats-the-big-idea-the-security-pass-printer-scanner" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's the Big Idea? The Security Pass Printer &amp; Scanner
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-the-jwt-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is the JWT Handler?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-its-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      How It's Used
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works-under-the-hood-creation-and-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      How it Works Under the Hood: Creation and Verification
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="chapter-7-jwt-handler">Chapter 7: JWT Handler</h1>
+<p>Welcome to the final chapter of our core concepts tutorial! In <a href="../06_auth_configuration_/">Chapter 6: Auth Configuration</a>, we learned about the "security rulebook" (<code>AuthConfig</code>) that holds all the vital settings for our server's security, like the secret key and allowed clients.</p>
+<p>But just having a rulebook isn't enough. We need someone (or something!) to actually <em>use</em> those rules to create and check the security passes. How does the server reliably generate those secure JWT tokens we discussed in <a href="../03_authentication__oauth___jwt__/">Chapter 3: Authentication (OAuth &amp; JWT)</a>? And how does it verify that incoming tokens are legitimate and haven't been tampered with?</p>
+<p>That's the job of the <strong>JWT Handler</strong>!</p>
+<h2 id="whats-the-big-idea-the-security-pass-printer-scanner">What's the Big Idea? The Security Pass Printer &amp; Scanner</h2>
+<p>Imagine our hospital security system again. We have the master plan (<a href="../06_auth_configuration_/">Auth Configuration</a>) specifying who is allowed access, their passwords, and the design of the security passes.</p>
+<p>Now, we need the specialized machine that actually:</p>
+<ol>
+<li><strong>Prints the Passes (Creates Tokens):</strong> When an authorized application proves its identity, this machine takes the rules (secret key, expiry time) and the specific permissions for that application, and prints a secure, tamper-proof access pass (a JWT).</li>
+<li><strong>Scans the Passes (Verifies Tokens):</strong> When someone tries to enter a secure area using their pass, this machine scans it. It checks if the pass was printed using the correct secret template (signature), if it hasn't expired, and if it's intended for use in this specific building (audience).</li>
+</ol>
+<p>The <strong>JWT Handler</strong> is precisely this specialized machine within the HMCP project. It's a focused component whose <em>only job</em> is to correctly create (encode) and verify (decode) JSON Web Tokens (JWTs) based on the rules defined in the <a href="../06_auth_configuration_/">Auth Configuration</a>.</p>
+<h2 id="what-is-the-jwt-handler">What is the JWT Handler?</h2>
+<p>The <code>JWTHandler</code> is a class (found in <code>src/hmcp/auth/jwt_handler.py</code>) dedicated to handling the cryptographic operations involved with JWTs. It takes the configuration details provided by an <code>AuthConfig</code> object and uses them to perform two main functions:</p>
+<ol>
+<li><strong><code>generate_token(...)</code>:</strong> Creates a new JWT string. It packages up information like the client ID (<code>sub</code>), granted permissions (<code>scope</code>), issuer (<code>iss</code>), audience (<code>aud</code>), and expiry time (<code>exp</code>), and then digitally signs this package using the <code>JWT_SECRET_KEY</code> and <code>JWT_ALGORITHM</code> from the <code>AuthConfig</code>.</li>
+<li><strong><code>verify_token(...)</code>:</strong> Takes an incoming JWT string and checks its validity. It uses the same <code>JWT_SECRET_KEY</code> and <code>JWT_ALGORITHM</code> to verify the digital signature. It also checks if the token has passed its <code>exp</code> time and if the <code>aud</code> matches the server. If everything checks out, it returns the decoded information (the "payload") contained within the token.</li>
+</ol>
+<p>By centralizing this logic, we ensure that tokens are always created and verified consistently and securely according to the defined configuration.</p>
+<h2 id="how-its-used">How It's Used</h2>
+<p>Other parts of the server, like the authentication endpoint handler (<code>OAuthServer</code>) and the security middleware (<code>AuthMiddleware</code>), rely on the <code>JWTHandler</code>.</p>
+<p><strong>1. Generating a Token (Example Usage):</strong></p>
+<p>When a client successfully authenticates (as seen in <a href="../03_authentication__oauth___jwt__/">Chapter 3: Authentication (OAuth &amp; JWT)</a>), the server logic (e.g., <code>OAuthServer</code>) uses the <code>JWTHandler</code> to create the access token.</p>
+<pre><code class="language-python"># --- Assume we have these objects already ---
+# auth_config: An instance of AuthConfig with all the rules
+# jwt_handler: An instance of JWTHandler(auth_config)
+# client_id_validated: The ID of the client that just logged in
+# scopes_granted: The permissions approved for this client
+
+print(f&quot;Asking JWT Handler to create a token for {client_id_validated}...&quot;)
+
+# Use the handler to generate the token string
+access_token = jwt_handler.generate_token(
+    client_id=client_id_validated,
+    scope=&quot; &quot;.join(scopes_granted) # Scopes are usually space-separated
+    # patient_id might be added here if needed
+)
+
+print(f&quot;JWT Handler returned a token: {access_token[:20]}...&quot;)
+# This 'access_token' string is then sent back to the client.
+</code></pre>
+<p><strong>Explanation:</strong></p>
+<ul>
+<li>The server logic calls <code>jwt_handler.generate_token</code>.</li>
+<li>It provides the necessary details like the <code>client_id</code> and the <code>scope</code>.</li>
+<li>The <code>JWTHandler</code> uses the secret key and other settings from its <code>AuthConfig</code> internally to create and sign the JWT.</li>
+<li>It returns the final, secure JWT string.</li>
+</ul>
+<p><strong>2. Verifying a Token (Example Usage):</strong></p>
+<p>When a client makes a request to a protected resource (like asking for <a href="../04_sampling_functionality_/">Sampling Functionality</a>), the server's security middleware (<code>AuthMiddleware</code>, discussed in <a href="../01_hmcp_server_/">Chapter 1: HMCP Server</a>) uses the <code>JWTHandler</code> to check the token sent by the client.</p>
+<pre><code class="language-python"># --- Assume we have these objects ---
+# jwt_handler: An instance of JWTHandler(auth_config)
+# incoming_token: The JWT string received from the client's Authorization header
+
+print(f&quot;Asking JWT Handler to verify token: {incoming_token[:20]}...&quot;)
+
+try:
+    # Use the handler to verify and decode the token
+    payload = jwt_handler.verify_token(token=incoming_token)
+
+    # If successful, 'payload' is a dictionary with the token data
+    client_id = payload.get(&quot;sub&quot;)
+    scopes = payload.get(&quot;scope&quot;)
+    print(f&quot;Token verified! Client: {client_id}, Scopes: {scopes}&quot;)
+    # Now the middleware knows who the user is and can allow the request
+
+except InvalidTokenError as e:
+    # If verification fails (bad signature, expired, etc.)
+    print(f&quot;Token verification failed: {e}&quot;)
+    # The middleware would reject the request (e.g., send a 401 error)
+</code></pre>
+<p><strong>Explanation:</strong></p>
+<ul>
+<li>The middleware calls <code>jwt_handler.verify_token</code> with the token string from the request.</li>
+<li>The <code>JWTHandler</code> uses the secret key and algorithm from its <code>AuthConfig</code> to check the signature. It also checks expiry and audience.</li>
+<li>If the token is valid, it returns the decoded <code>payload</code> (a dictionary).</li>
+<li>If the token is invalid for any reason, it raises an <code>InvalidTokenError</code>.</li>
+</ul>
+<h2 id="how-it-works-under-the-hood-creation-and-verification">How it Works Under the Hood: Creation and Verification</h2>
+<p>Let's trace the process when the <code>JWTHandler</code> is called.</p>
+<p><strong>Token Creation (<code>generate_token</code>):</strong></p>
+<ol>
+<li><strong>Receive Request:</strong> The <code>generate_token</code> method is called with <code>client_id</code>, <code>scope</code>, etc.</li>
+<li><strong>Get Config:</strong> It accesses its stored <code>AuthConfig</code> object.</li>
+<li><strong>Prepare Payload:</strong> It creates a dictionary (<code>payload</code>) containing standard JWT claims:<ul>
+<li><code>iss</code> (Issuer): From <code>auth_config.ISSUER</code>.</li>
+<li><code>sub</code> (Subject): The provided <code>client_id</code>.</li>
+<li><code>aud</code> (Audience): From <code>auth_config.JWT_AUDIENCE</code>.</li>
+<li><code>iat</code> (Issued At): Current time.</li>
+<li><code>exp</code> (Expiration Time): Current time + <code>auth_config.TOKEN_EXPIRY_HOURS</code>.</li>
+<li><code>scope</code>: The provided <code>scope</code>.</li>
+<li>(Maybe <code>patient</code> if relevant).</li>
+</ul>
+</li>
+<li><strong>Get Signing Details:</strong> It retrieves the <code>auth_config.JWT_SECRET_KEY</code> and <code>auth_config.JWT_ALGORITHM</code>.</li>
+<li><strong>Encode &amp; Sign:</strong> It uses an underlying JWT library (like <code>PyJWT</code>) to encode the <code>payload</code> dictionary into a JSON string, then Base64 encode it, and finally create a digital signature using the secret key and algorithm. These parts (encoded header, encoded payload, signature) are joined by dots (<code>.</code>) to form the final JWT string.</li>
+<li><strong>Return Token:</strong> It returns the complete JWT string.</li>
+</ol>
+<p><strong>Token Verification (<code>verify_token</code>):</strong></p>
+<ol>
+<li><strong>Receive Request:</strong> The <code>verify_token</code> method is called with the <code>token</code> string.</li>
+<li><strong>Get Config:</strong> It accesses its stored <code>AuthConfig</code> object.</li>
+<li><strong>Get Verification Details:</strong> It retrieves the <code>auth_config.JWT_SECRET_KEY</code>, <code>auth_config.JWT_ALGORITHM</code>, and <code>auth_config.JWT_AUDIENCE</code>.</li>
+<li><strong>Decode &amp; Verify:</strong> It uses the underlying JWT library to:<ul>
+<li>Split the token string into its header, payload, and signature parts.</li>
+<li>Decode the header and payload.</li>
+<li><strong>Verify Signature:</strong> Re-calculate the signature using the header, payload, and the <code>JWT_SECRET_KEY</code>, then compare it to the signature part of the token. If they don't match, raise an error (Invalid Signature).</li>
+<li><strong>Verify Expiry:</strong> Check if the current time is before the <code>exp</code> time found in the payload. If expired, raise an error.</li>
+<li><strong>Verify Audience:</strong> Check if the <code>aud</code> claim in the payload matches the expected <code>auth_config.JWT_AUDIENCE</code>. If not, raise an error.</li>
+<li>(Other checks like 'Issued At' (<code>iat</code>) or 'Not Before' (<code>nbf</code>) might also occur).</li>
+</ul>
+</li>
+<li><strong>Return Payload:</strong> If all checks pass, return the decoded <code>payload</code> dictionary. If any check fails, raise an <code>InvalidTokenError</code>.</li>
+</ol>
+<p><strong>Sequence Diagram (Token Verification):</strong></p>
+<pre><code class="language-mermaid">sequenceDiagram
+    participant Client as Client Application
+    participant Middleware as AuthMiddleware
+    participant JWTH as JWT Handler
+    participant AuthCfg as AuthConfig
+
+    Client-&gt;&gt;+Middleware: Request with JWT in Header
+    Middleware-&gt;&gt;Middleware: Extract token string
+    Middleware-&gt;&gt;+JWTH: verify_token(token)
+    JWTH-&gt;&gt;+AuthCfg: Get JWT_SECRET_KEY, ALGORITHM, AUDIENCE
+    JWTH-&gt;&gt;JWTH: Decode token, Check Signature (using Secret Key)
+    JWTH-&gt;&gt;JWTH: Check Expiry (using payload 'exp')
+    JWTH-&gt;&gt;JWTH: Check Audience (using payload 'aud' and AuthCfg)
+    alt Token is Valid
+        JWTH--&gt;&gt;-Middleware: Return decoded payload
+        Middleware-&gt;&gt;Middleware: Extract client_id, scopes from payload
+        Middleware-&gt;&gt;Client: Allow request to proceed / Send Response
+    else Token is Invalid
+        JWTH--&gt;&gt;-Middleware: Raise InvalidTokenError
+        Middleware--&gt;&gt;-Client: Send Error Response (e.g., 401 Unauthorized)
+    end
+
+</code></pre>
+<p><strong>Code Snippets (<code>src/hmcp/auth/jwt_handler.py</code> Simplified):</strong></p>
+<ul>
+<li>
+<p><strong>Class Structure:</strong></p>
+<p>```python</p>
+<h1 id="inside-srchmcpauthjwt_handlerpy">Inside src/hmcp/auth/jwt_handler.py</h1>
+<p>import jwt as pyjwt # Using the PyJWT library
+from datetime import datetime, timedelta
+from .config import AuthConfig
+from .exceptions import InvalidTokenError</p>
+<p>class JWTHandler:
+    def <strong>init</strong>(self, config: AuthConfig):
+        """Stores the security rulebook."""
+        self.config = config
+        # self.blacklisted_tokens = set() # For token revocation (optional)</p>
+<pre><code>def generate_token(self, client_id: str, scope: str, ...) -&gt; str:
+    """Creates and signs a JWT."""
+    # 1. Prepare payload dictionary using self.config
+    payload = { ... } # Includes sub, exp, scope, iss, aud...
+    payload['exp'] = datetime.utcnow() + timedelta(
+        hours=self.config.TOKEN_EXPIRY_HOURS
+    )
+
+    # 2. Encode using PyJWT and settings from self.config
+    token = pyjwt.encode(
+        payload,
+        self.config.JWT_SECRET_KEY,
+        algorithm=self.config.JWT_ALGORITHM
+    )
+    return token
+
+def verify_token(self, token: str) -&gt; dict:
+    """Verifies a JWT's signature, expiry, audience and returns payload."""
+    try:
+        # 1. Decode using PyJWT and settings from self.config
+        #    This automatically checks signature, expiry, audience
+        payload = pyjwt.decode(
+            token,
+            self.config.JWT_SECRET_KEY,
+            algorithms=[self.config.JWT_ALGORITHM],
+            audience=self.config.JWT_AUDIENCE
+        )
+        # 2. Return payload if successful
+        return payload
+    except (pyjwt.ExpiredSignatureError, pyjwt.InvalidAudienceError,
+            pyjwt.InvalidTokenError) as e:
+        # 3. Raise our specific error if PyJWT validation fails
+        raise InvalidTokenError(f"JWT Verification Failed: {e}")
+</code></pre>
+<p>```</p>
+</li>
+</ul>
+<p><strong>Explanation:</strong></p>
+<ul>
+<li>The <code>__init__</code> method stores the <code>AuthConfig</code> instance passed to it.</li>
+<li><code>generate_token</code> builds the <code>payload</code> dictionary using details from the arguments and <code>self.config</code>, then uses <code>pyjwt.encode</code> with the secret key and algorithm from <code>self.config</code>.</li>
+<li><code>verify_token</code> uses <code>pyjwt.decode</code>, passing the token string and the verification parameters (secret key, algorithms, audience) directly from <code>self.config</code>. The <code>pyjwt</code> library handles the complex signature, expiry, and audience checks internally. If any check fails, it raises an exception, which we catch and re-raise as our specific <code>InvalidTokenError</code>.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>You've reached the end of our core concepts tour! In this chapter, we focused on the <strong>JWT Handler</strong>. You learned it's the specialized component responsible for the critical tasks of <strong>creating (encoding)</strong> and <strong>verifying (decoding)</strong> JSON Web Tokens. Acting like a dedicated security pass printer and scanner, it uses the rules (secret key, algorithm, expiry, audience) defined in the <a href="../06_auth_configuration_/">Auth Configuration</a> to ensure tokens are generated securely and validated correctly. Components like the <code>OAuthServer</code> and <code>AuthMiddleware</code> rely on the <code>JWTHandler</code> to manage the lifecycle of these important security tokens.</p>
+<p>Understanding these seven core components – the <a href="../01_hmcp_server_/">HMCP Server</a>, <a href="../02_hmcp_client_/">HMCP Client</a>, the overall <a href="../03_authentication__oauth___jwt__/">Authentication (OAuth &amp; JWT)</a> flow, the unique <a href="../04_sampling_functionality_/">Sampling Functionality</a>, the safety net of <a href="../05_guardrails_/">Guardrails</a>, the security rulebook in <a href="../06_auth_configuration_/">Auth Configuration</a>, and the token engine of the <a href="./">JWT Handler</a> – gives you a solid foundation for working with the Healthcare-MCP project. Happy coding!</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

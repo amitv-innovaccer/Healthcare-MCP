@@ -1,0 +1,1222 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://amitv-innovaccer.github.io/Healthcare-MCP/tutorial/06_auth_configuration_/">
+      
+      
+        <link rel="prev" href="../05_guardrails_/">
+      
+      
+        <link rel="next" href="../07_jwt_handler_/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>06 Auth Configuration - Healthcare-MCP Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-6-auth-configuration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Healthcare-MCP Docs" class="md-header__button md-logo" aria-label="Healthcare-MCP Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Healthcare-MCP Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              06 Auth Configuration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../examples/README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Examples
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../src/hmcp/README.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  HCMP SDK
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../specification/" class="md-tabs__link">
+          
+  
+  
+  Specification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Tutorial
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Healthcare-MCP Docs" class="md-nav__button md-logo" aria-label="Healthcare-MCP Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Healthcare-MCP Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../src/hmcp/README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HCMP SDK
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Specification
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Specification
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specification/context/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Context
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specification/auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Auth
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specification/hmcp_auth_vs_mcp_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HMCP Auth vs MCP Auth
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specification/guardrails/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guardrails
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../specification/sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sampling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorial
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_hmcp_server_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    01 HMCP Server
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_hmcp_client_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    02 HMCP Client
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_authentication__oauth___jwt__/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    03 Authentication (OAuth & JWT)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_sampling_functionality_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    04 Sampling Functionality
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_guardrails_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    05 Guardrails
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    06 Auth Configuration
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    06 Auth Configuration
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#whats-the-big-idea-the-security-rulebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's the Big Idea? The Security Rulebook
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-auth-configuration-authconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Auth Configuration (AuthConfig)?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use-it-setting-up-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Use It: Setting Up the Server
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works-under-the-hood-using-the-rulebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      How It Works Under the Hood: Using the Rulebook
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_jwt_handler_/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    07 JWT Handler
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#whats-the-big-idea-the-security-rulebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's the Big Idea? The Security Rulebook
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-auth-configuration-authconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Auth Configuration (AuthConfig)?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use-it-setting-up-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Use It: Setting Up the Server
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works-under-the-hood-using-the-rulebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      How It Works Under the Hood: Using the Rulebook
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="chapter-6-auth-configuration">Chapter 6: Auth Configuration</h1>
+<p>In <a href="../05_guardrails_/">Chapter 5: Guardrails</a>, we saw how to add safety layers to check <em>what</em> users can say or ask. But before we even get to the content of the request, the <a href="../01_hmcp_server_/">HMCP Server</a> needs to know <em>who</em> is allowed to connect in the first place and how to verify their identity securely.</p>
+<p>Think back to <a href="../03_authentication__oauth___jwt__/">Chapter 3: Authentication (OAuth &amp; JWT)</a>. The client needed a <code>Client ID</code> and <code>Client Secret</code> to get an access token (JWT), and the server needed a secret key to create that token. Where does the server store all these critical security settings? We need a single, organized place to keep this "security rulebook".</p>
+<p>That's exactly what <strong>Auth Configuration</strong> provides!</p>
+<h2 id="whats-the-big-idea-the-security-rulebook">What's the Big Idea? The Security Rulebook</h2>
+<p>Imagine setting up the security system for a new hospital wing. You need a master plan that lists:</p>
+<ul>
+<li>Which companies (applications) are allowed access? (<code>ALLOWED_CLIENTS</code>)</li>
+<li>What are their secret passcodes? (<code>secret</code> within <code>ALLOWED_CLIENTS</code>)</li>
+<li>What specific areas (permissions/scopes) can each company access? (<code>scopes</code> within <code>ALLOWED_CLIENTS</code>)</li>
+<li>What is the master secret code used to create the temporary security badges (JWTs)? (<code>JWT_SECRET_KEY</code>)</li>
+<li>How long is each temporary badge valid? (<code>TOKEN_EXPIRY_HOURS</code>)</li>
+<li>What's the official procedure for signing badges? (<code>JWT_ALGORITHM</code>)</li>
+<li>Where is the security desk located where staff request their badges? (<code>OAUTH_TOKEN_URL</code>)</li>
+<li>What are all the possible access areas (scopes) that exist in the building? (<code>OAUTH_SCOPES</code>)</li>
+</ul>
+<p>The <strong>Auth Configuration</strong> in Healthcare-MCP is precisely this master security plan. It's a dedicated structure, usually an object created from the <code>AuthConfig</code> class, that holds all these crucial settings together in one place.</p>
+<h2 id="what-is-auth-configuration-authconfig">What is Auth Configuration (<code>AuthConfig</code>)?</h2>
+<p>The <code>AuthConfig</code> class (found in <code>src/hmcp/auth/config.py</code>) acts as a container or blueprint for storing all authentication and authorization related settings for the HMCP Server.</p>
+<p>Here are the key pieces of information it holds:</p>
+<ul>
+<li><code>JWT_SECRET_KEY</code>: This is the <strong>most critical secret</strong>. It's like the unique, confidential key used by the security office to emboss or digitally sign the temporary access badges (JWTs). Anyone with this key could potentially forge badges, so it must be kept extremely secure.</li>
+<li><code>JWT_ALGORITHM</code>: The specific cryptographic method used for signing the badges (e.g., "HS256"). This ensures everyone uses the same signing procedure.</li>
+<li><code>TOKEN_EXPIRY_HOURS</code>: How many hours a temporary access badge (JWT) is valid before it expires and the application needs to request a new one.</li>
+<li><code>ALLOWED_CLIENTS</code>: A dictionary listing all the applications (clients) that are permitted to request access. For each client, it stores:<ul>
+<li><code>secret</code>: The client's unique password (the <code>Client Secret</code>). Must be kept confidential.</li>
+<li><code>scopes</code>: A list of permissions (like <code>hmcp:access</code> or <code>patient/hmcp:read</code>) that this specific client is allowed to have.</li>
+</ul>
+</li>
+<li><code>OAUTH_SCOPES</code>: A complete list of all possible permissions (scopes) that are defined within the HMCP system. This helps validate requested scopes.</li>
+<li><code>OAUTH_TOKEN_URL</code>: The specific web address path (like <code>/oauth/token</code>) on the server where client applications must go to exchange their credentials (Client ID/Secret) for an access token (JWT).</li>
+<li><code>ISSUER</code>: A name identifying who issued the token (e.g., "HMCP_Server").</li>
+<li><code>JWT_AUDIENCE</code>: Specifies who the token is intended for (e.g., the specific HMCP server).</li>
+</ul>
+<p>Having all these settings neatly organized in <code>AuthConfig</code> makes the server's security setup clear and manageable.</p>
+<h2 id="how-to-use-it-setting-up-the-server">How to Use It: Setting Up the Server</h2>
+<p>When you initialize an <a href="../01_hmcp_server_/">HMCP Server</a>, you need to provide it with these security rules. You do this by creating an instance of the <code>AuthConfig</code> class and passing it to the server's constructor.</p>
+<pre><code class="language-python"># Import necessary classes
+from hmcp.auth import AuthConfig
+from hmcp.mcpserver.hmcp_server import HMCPServer
+
+# --- 1. Define your security settings ---
+# WARNING: In production, load secrets securely (e.g., from environment variables)!
+# Do NOT hardcode real secrets like this in your code.
+my_auth_config = AuthConfig(
+    # The crucial secret key for signing tokens
+    JWT_SECRET_KEY=&quot;a-very-strong-and-secret-key-replace-me!&quot;,
+    JWT_ALGORITHM=&quot;HS256&quot;,
+    TOKEN_EXPIRY_HOURS=2, # Tokens last for 2 hours
+    OAUTH_TOKEN_URL=&quot;/oauth/token&quot;, # Path for clients to get tokens
+
+    # Define which clients can connect
+    ALLOWED_CLIENTS={
+        &quot;doctors-assistant-app&quot;: {
+            &quot;secret&quot;: &quot;assistant-app-secret-password&quot;, # Keep this secret!
+            &quot;scopes&quot;: [&quot;hmcp:access&quot;, &quot;patient/hmcp:read&quot;, &quot;patient/hmcp:write&quot;]
+        },
+        &quot;billing-system&quot;: {
+            &quot;secret&quot;: &quot;billing-system-secure-pass&quot;, # Keep this secret!
+            &quot;scopes&quot;: [&quot;hmcp:access&quot;, &quot;billing:read&quot;] # Different permissions
+        }
+        # Add more clients here
+    },
+    # Define all possible scopes in the system
+    OAUTH_SCOPES=[&quot;hmcp:access&quot;, &quot;patient/hmcp:read&quot;, &quot;patient/hmcp:write&quot;, &quot;billing:read&quot;]
+)
+
+# --- 2. Create the HMCP Server instance ---
+# Pass the configuration object during initialization
+hmcp_server = HMCPServer(
+    name=&quot;Secure HMCP Server&quot;,
+    host=&quot;0.0.0.0&quot;,
+    port=8050,
+    auth_config=my_auth_config, # Pass the security rules here!
+    # samplingCallback=... # Add your sampling logic (from Chapter 4)
+    # guardrails=... # Add guardrails (from Chapter 5)
+)
+
+print(&quot;HMCP Server configured with security settings.&quot;)
+# In a real application, you would start the server:
+# hmcp_server.run()
+</code></pre>
+<p><strong>Explanation:</strong></p>
+<ol>
+<li>We import <code>AuthConfig</code> and <code>HMCPServer</code>.</li>
+<li>We create an instance of <code>AuthConfig</code>, filling in the desired values.<ul>
+<li>We set the <code>JWT_SECRET_KEY</code> (again, <strong>use a secure method</strong> in real apps!).</li>
+<li>We define two allowed clients (<code>doctors-assistant-app</code>, <code>billing-system</code>) with their respective secrets and scopes.</li>
+<li>We list all possible scopes the server understands in <code>OAUTH_SCOPES</code>.</li>
+</ul>
+</li>
+<li>When creating the <code>HMCPServer</code>, we pass our <code>my_auth_config</code> object to the <code>auth_config</code> parameter.</li>
+</ol>
+<p>Now, the <code>hmcp_server</code> instance knows all the security rules it needs to operate. It will use this configuration object internally whenever it needs to check credentials, issue tokens, or verify permissions.</p>
+<h2 id="how-it-works-under-the-hood-using-the-rulebook">How It Works Under the Hood: Using the Rulebook</h2>
+<p>The <code>AuthConfig</code> object itself doesn't <em>do</em> anything; it just holds the information. Other components of the server rely on it to perform their security tasks:</p>
+<ol>
+<li>
+<p><strong>Client Authentication (<code>/oauth/token</code>):</strong> When a client sends its ID and Secret to the <code>OAUTH_TOKEN_URL</code> (handled by <code>OAuthServer</code> logic as seen in <a href="../03_authentication__oauth___jwt__/">Chapter 3: Authentication (OAuth &amp; JWT)</a>):</p>
+<ul>
+<li>The <code>OAuthServer</code> looks inside <code>auth_config.ALLOWED_CLIENTS</code>.</li>
+<li>It checks if the provided <code>client_id</code> exists.</li>
+<li>If yes, it checks if the provided <code>client_secret</code> matches the stored <code>secret</code> for that client in the config.</li>
+<li>It also checks if the scopes the client requested are listed in the client's allowed <code>scopes</code> in the config.</li>
+</ul>
+</li>
+<li>
+<p><strong>Token Generation:</strong> If the client's credentials are valid:</p>
+<ul>
+<li>The <code>OAuthServer</code> asks the <a href="../07_jwt_handler_/">JWT Handler</a> (<code>JWTHandler</code>) to create a token.</li>
+<li>The <code>JWTHandler</code> uses <code>auth_config.JWT_SECRET_KEY</code>, <code>auth_config.JWT_ALGORITHM</code>, and <code>auth_config.TOKEN_EXPIRY_HOURS</code> to generate and sign the JWT.</li>
+</ul>
+</li>
+<li>
+<p><strong>Request Verification:</strong> When a client makes a subsequent request (like <code>create_message</code>) using the obtained JWT in the <code>Authorization</code> header:</p>
+<ul>
+<li>The <code>AuthMiddleware</code> (seen in <a href="../01_hmcp_server_/">Chapter 1: HMCP Server</a>) intercepts the request.</li>
+<li>It calls the <code>JWTHandler</code>'s <code>verify_token</code> method.</li>
+<li>The <code>JWTHandler</code> uses <code>auth_config.JWT_SECRET_KEY</code> and <code>auth_config.JWT_ALGORITHM</code> to check the token's signature and <code>auth_config.TOKEN_EXPIRY_HOURS</code> (indirectly via the <code>exp</code> claim) to check if it's expired.</li>
+<li>The <code>AuthMiddleware</code> might also double-check that the <code>client_id</code> (<code>sub</code> claim) found inside the validated token still exists in <code>auth_config.ALLOWED_CLIENTS</code>.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Sequence Diagram (Token Request - Highlighting AuthConfig):</strong></p>
+<p>This shows how the configuration is consulted when a client asks for a token.</p>
+<pre><code class="language-mermaid">sequenceDiagram
+    participant ClientApp as Client Application
+    participant Endpoint as Server (/oauth/token)
+    participant OServer as OAuthServer Logic
+    participant JWTH as JWT Handler
+    participant AuthCfg as AuthConfig (Rulebook)
+
+    ClientApp-&gt;&gt;+Endpoint: POST /oauth/token (Client ID, Secret)
+    Endpoint-&gt;&gt;+OServer: Handle Token Request(data)
+    OServer-&gt;&gt;+AuthCfg: Get ALLOWED_CLIENTS
+    OServer-&gt;&gt;OServer: Validate Client ID &amp; Secret using AuthCfg data
+    Note over OServer, AuthCfg: If Invalid: Reject Request
+    OServer-&gt;&gt;+JWTH: generate_token(client_id, scope)
+    JWTH-&gt;&gt;+AuthCfg: Get JWT_SECRET_KEY, ALGORITHM, EXPIRY_HOURS
+    JWTH-&gt;&gt;JWTH: Create &amp; Sign JWT using AuthCfg details
+    JWTH--&gt;&gt;-OServer: Return Signed JWT
+    OServer--&gt;&gt;-Endpoint: Format Response
+    Endpoint--&gt;&gt;-ClientApp: Send Token Response
+</code></pre>
+<p><strong>Code Snippets (Simplified):</strong></p>
+<ul>
+<li>
+<p><strong><code>OAuthServer</code> checking credentials:</strong></p>
+<p>```python</p>
+<h1 id="inside-srchmcpauthoauth_serverpy-conceptual">Inside src/hmcp/auth/oauth_server.py (Conceptual)</h1>
+<p>class OAuthServer:
+    def <strong>init</strong>(self, config: AuthConfig):
+        self.config = config # Store the rulebook
+        # ...</p>
+<pre><code>def validate_client(self, client_id: str, client_secret: str) -&gt; bool:
+    # Look up the client in the config
+    client_info = self.config.ALLOWED_CLIENTS.get(client_id)
+    if not client_info:
+        print(f"Client '{client_id}' not found in AuthConfig.")
+        return False # Client not allowed
+
+    # Check if the secret matches the one in the config
+    if client_info.get("secret") == client_secret:
+        print(f"Client '{client_id}' authenticated successfully.")
+        return True # Secrets match!
+    else:
+        print(f"Incorrect secret for client '{client_id}'.")
+        return False # Wrong secret
+</code></pre>
+<p>```</p>
+</li>
+<li>
+<p><strong><code>JWTHandler</code> generating a token:</strong></p>
+<p>```python</p>
+<h1 id="inside-srchmcpauthjwt_handlerpy-conceptual">Inside src/hmcp/auth/jwt_handler.py (Conceptual)</h1>
+<p>import jwt as pyjwt
+from datetime import datetime, timedelta</p>
+<p>class JWTHandler:
+    def <strong>init</strong>(self, config: AuthConfig):
+        self.config = config # Store the rulebook
+        # ...</p>
+<pre><code>def generate_token(self, client_id: str, scope: str, ...) -&gt; str:
+    # Prepare the payload (data inside the token)
+    now = datetime.utcnow()
+    expiry = now + timedelta(hours=self.config.TOKEN_EXPIRY_HOURS) # Use expiry from config
+    payload = {
+        'sub': client_id,
+        'exp': expiry,
+        'scope': scope,
+        'iss': self.config.ISSUER, # Use issuer from config
+        # ... other claims ...
+    }
+
+    # Encode and sign using settings from the config
+    token = pyjwt.encode(
+        payload,
+        self.config.JWT_SECRET_KEY, # Use secret key from config
+        algorithm=self.config.JWT_ALGORITHM # Use algorithm from config
+    )
+    return token
+</code></pre>
+<p>```</p>
+</li>
+</ul>
+<p>These snippets illustrate how the <code>AuthConfig</code> object provides the necessary parameters to the components that handle the actual security logic.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>You've learned that <strong>Auth Configuration</strong>, represented by the <code>AuthConfig</code> class, is the central repository for all security settings in the HMCP Server. It's the "security rulebook" defining allowed clients, their secrets, permissions (scopes), JWT parameters (secret key, algorithm, expiry), and the token endpoint URL.</p>
+<p>You saw how to create an <code>AuthConfig</code> instance and pass it to the <code>HMCPServer</code> during setup, and how components like the <code>OAuthServer</code> and <code>JWTHandler</code> rely on this configuration to perform authentication and token management. Keeping these settings organized is crucial for maintaining a secure server.</p>
+<p>Now that we understand the rulebook (<code>AuthConfig</code>), let's take a closer look at the component specifically responsible for creating and verifying the security badges (JWTs) based on these rules.</p>
+<p>Let's dive into the <a href="../07_jwt_handler_/">Chapter 7: JWT Handler</a>!</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
